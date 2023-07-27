@@ -1,24 +1,32 @@
-# README
+# hana238
+​
+## サイト概要
+### サイトテーマ
+花束などの制作受注を依頼するECサイト
+​
+### テーマを選んだ理由
+友人が以前より個人で花の制作受注できるようなサイトが欲しいと言っていたので、簡素ですが実際にヒアリングを行いアプリケーション開発をし納品するという実務に似た経験を積んでみたかったからです。
+また実際にサイトを訪れる方は、花束製作等の依頼はシチュエーションなど想像して製作依頼をすると思います。
+花の成果物は決まった形ではないため、そのシチュエーション別にどんな成果物があるのか写真で見て依頼する方の注文したい内容を友人側がうまく汲み取れると双方に利益があると考えてこのテーマにしました。
+（支払いなどは擬似的に行う実装にします）
+​
+### ターゲットユーザ
+・顧客側：お花が好いきな方や、婚礼などのハレの日のために利用したい方
+・管理者側：主に個人（〜少人数）で実店舗を持たず経営している方
+（花だけではなく、個人でアクセサリーや色々作っている方のポジションです）
+​
+### 主な利用シーン
+・顧客側：花の贈り物を検討している時、ハレの日での利用を検討している時
+​
+## 設計書
+後日作成予定です
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 実装機能リストURL
+https://docs.google.com/spreadsheets/d/1a6AWAtrsVizyeqtWk8tFvn6FIAsQV2eXXUy_TYwpQiM/edit?usp=sharing
