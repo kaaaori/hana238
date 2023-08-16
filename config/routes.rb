@@ -22,12 +22,15 @@ scope module: :public do
   delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
   post '/orders/confirm' => 'orders#confirm'
   get '/orders/thanks' => 'orders#thanks'
+  
+    
+  
 end
 
 namespace :admin do
   root to: 'homes#top'
-  resources :items, only: [:new, :index, :create, :show, :edit, :update]
-  resources :genres, only: [:index, :create, :edit, :update]
+  resources :items, only: [:new, :index, :create, :show, :edit, :update, :destroy]
+  resources :categories, only: [:index, :create, :edit, :update, :destroy]
   resources :customers, only: [:index, :show, :edit, :update]
   resources :orders, only: [:show]
 end

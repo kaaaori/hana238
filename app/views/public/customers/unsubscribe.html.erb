@@ -1,0 +1,14 @@
+<div class="container text-center">
+  <h5 class="mt-5 mb-3 my-4">退会手続き</h5>
+  <div class="row d-flex justify-content-center mt-2">
+    <p>退会をすると、会員登録情報や</p>
+    <p>これまでの購入履歴が閲覧できなくなります。</p>
+    <p>退会する場合は「退会する」をクリックしてください。</p>
+  </div>
+  
+  <div class="d-flex justify-content-center mt-5">
+    <%= button_to '退会する', customers_withdrawal_path, method: :patch, class: 'btn btn-danger', data: { confirm: '本当に退会しますか？' } %>
+    <div class="custom-gap"></div>
+    <%= button_to '退会しない', mypage_path, method: :get, class: 'btn btn-primary' %>
+  </div>
+</div>

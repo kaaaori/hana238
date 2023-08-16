@@ -16,7 +16,6 @@ class Customer < ApplicationRecord
   # validates :address_city, presence: true
   # validates :address_street, presence: true
   
-         
   include JpPrefecture
   jp_prefecture :prefecture_code
 

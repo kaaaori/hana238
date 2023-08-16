@@ -1,0 +1,24 @@
+<div class="container">
+  <h3 class="mt-5 text-center">カテゴリー</h3>
+  <h5 class="mt-5 mb-3 text-center">編集</h5>
+  <!--勝手にCategoryと入らないように-->
+    <%= form_with model: @category, url: admin_category_path do |f| %>
+    <div class="row d-flex justify-content-center mt-5">
+      <div class="col-2">
+        <%= f.text_field :name, class: 'form-control', placeholder:"カテゴリ名" %>
+      </div>
+      
+      <div class="col-2">
+        <%= f.submit "変更", class: "form-control btn btn-light" %>
+      </div>
+    </div>
+    <% end %>
+    
+    <!--一つ前に戻るボタンにしたい＋右寄せ-->
+    <div class="row text-right mt-2">
+      <%= link_to "BACK", admin_categories_path %>
+    </div>
+    
+</div>
+      
+ 

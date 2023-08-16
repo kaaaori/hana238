@@ -1,52 +1,49 @@
 <div class="container">
-    <h4 class="mt-5 text-center">会員情報編集</h4>
-
-
-</div>
-<div class="container">
+  <h5 class="mt-5 mb-3 text-center">会員情報編集</h5>
   <div class="row">
-    <div class="col-8 mx-auto" >
-      <h5>会員情報編集</h5>
-      <div class="errorblock">
-        <% if @customer.errors.any? %>
-          <div class="alert">
-            <h3><%= @customer.errors.count %> error prohibited this obj from being saved:</h3>
-              <ul>
-                <% @customer.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-          </div>
-        <% end %>
-      </div>
-    
-      <%= form_with model: @customer, url: customers_information_path do |f| %>
-        <div class="form-group row">
-          <%=f.label :input_name, "氏名", class:"col-3"%>
-          <div class="col-4">
-          <%= f.text_field :last_name, autofocus: true, id:"inputName" %>
-          </div>
-          <div class="col-4">
-          <%= f.text_field :first_name, autofocus: true, id:"inputName" %>
-          </div>
-        </div>
-        <div class="form-group row">
-          <%=f.label :input_telephone_number, "電話番号", class:"col-3"%>
-          <div class="col-4">
-          <%= f.text_field :telephone_number, autofocus: true, id:"inputTelephoneNumbere" %>
-          </div>
-        </div>
-        <div class="form-group row">
-          <%=f.label :input_email, "メールアドレス", class:"col-3"%>
-          <div class="col-4">
-          <%= f.text_field :email, autofocus: true, id:"inputEmail" %>
-          </div>
-        </div>
-        <div class="form-group">
-          <%= f.submit "編集内容を保存", class: "btn btn-success" %>
-          <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger"%>
+    <div class="errorblock">
+      <% if @customer.errors.any? %>
+        <div class="alert">
+          <h3><%= @customer.errors.count %> error prohibited this obj from being saved:</h3>
+            <ul>
+              <% @customer.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
         </div>
       <% end %>
-    </div> 
+    </div>
+  </div>  
+    
+  <%= form_with model: @customer, url: customers_info_path do |f| %>
+  <div class="row mt-3 mb-4 d-flex justify-content-center">
+    <div class="col-2">
+      <%= f.text_field :last_name, autofocus: true, id:"inputName", class: 'form-control' , placeholder:"姓" %>
+    </div>
+    <div class="col-2">
+      <%= f.text_field :first_name, autofocus: true, id:"inputName", class: 'form-control' , placeholder:"名" %>
+    </div>
   </div>
+  <div class="mb-4 col-4 mx-auto">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder:"name@example.com"%>
+  </div>
+  <div class="mb-4 col-4 mx-auto">
+    <%= f.label :電話番号 %><br />
+    <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要"%>
+  </div>
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <%= f.submit "編集内容を保存", class: "btn btn-primary" %>
+  </div>
+  
+  <!--退会するボタンが上のsumitと同じサイズではないのが気になる-->
+  <div class="row text-center">
+    <div class="row mt-5 mx-auto">
+      <h7 class="mt-5  mb-3">ご退会される方は、こちらからお願いいたします。</h7>
+        <div class="row d-flex justify-content-center mt-2">
+          <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-dark col-4" %>
+        </div>
+    </div>
+  </div>
+  <% end %>
 </div>
