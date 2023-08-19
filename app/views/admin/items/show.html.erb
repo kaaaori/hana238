@@ -1,6 +1,8 @@
 <div class="container">
   <h3 class="mt-5 text-center">商品詳細</h3>
-  <div class="row mt-5 mb-3">
+  
+  <!--全体的にセンタ揃え＆テーブル幅短くする-->
+  <div class="row d-flex justify-content-center mt-5 mb-3">
     <div class="d-block mx-auto img-fluid w-50">
       <%= image_tag @item.get_image(300,300) %>
     </div>
@@ -34,4 +36,18 @@
           </table>
         <% end %>
   </div>
+  
+  <div class="row d-flex justify-content-center mt-2">
+    <div class="col-1">
+      <%= link_to "編集", edit_admin_item_path, class: "form-control btn btn-sm btn-light" %>
+    </div>
+    <div class="col-1">
+      <%= link_to "削除", edit_admin_item_path, class: "form-control btn btn-sm btn-danger", method: :delete %>
+    </div>
+  </div>
+  
+  <!--一つ前に戻るボタンにしたい＋右寄せ-->
+    <div class="row text-right mt-2">
+      <%= link_to "BACK", admin_items_path %>
+    </div>
 </div>

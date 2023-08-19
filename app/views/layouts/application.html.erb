@@ -14,28 +14,90 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
+    <header>
+      <nav class="navbar navbar-light">
+  	    <div class="container">
+  	      <!--画像センター寄りか左寄りか確認とる-->
+  	      <%= link_to image_tag('logo.png', width: 268, height: 78), root_path, class: 'sized navbar-brand' %>
+  		    <div class="float-end">
+      			<ul class="list-inline mt-5">
+      				<li class="list-inline-item ms-2">
+      				  <%= link_to root_path, class: 'nav-link text-dark' do %>
+      				  <i class="fas fa-home fa-lg" style="color: #000000;"></i>
+      				  <% end %>
+      				</li>
+              <% if customer_signed_in? %>
+                <li class="list-inline-item ms-2">
+                  <%= link_to mypage_path, class: 'nav-link text-dark' do %>
+                  <i class="far fa-user fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                </li>
+                <li class="list-inline-item ms-2">
+                  <%= link_to cart_items_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                </li>
+      				<% elsif admin_signed_in? %>
+      				   <li class="list-inline-item ms-2">
+                  <%= link_to "商品一覧", admin_items_path, class:"btn btn-outline-secondary" %>
+                </li>
+                 <li class="list-inline-item ms-2">
+                  <%= link_to "会員一覧", admin_customers_path, class:"btn btn-outline-secondary" %>
+                </li>
+                 <li class="list-inline-item ms-2">
+                  <%= link_to "注文履歴一覧", admin_root_path, class:"btn btn-outline-secondary" %>
+                </li>
+                 <li class="list-inline-item ms-2">
+                  <%= link_to "カテゴリ一覧", admin_categories_path, class:"btn btn-outline-secondary" %>
+                </li>
+                <li class="list-inline-item ms-2">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+                </li>
+      				<% else %>
+      				  <li class="list-inline-item ms-2">
+                  <%= link_to new_customer_session_path, class: 'nav-link text-dark' do %>
+                  <i class="far fa-user fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                </li>
+                <li class="list-inline-item ms-2">
+                  <%= link_to cart_items_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                </li>
+      				<% end %>
+      				<!--ハンバーガーmの外枠消せない（シャドーは消せた）-->
+      				<li class="list-inline-item ms-2">
+      				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </li>
+      			</ul>
+      		</div>
+      	</div>
+      	
+      	<!--ハンバーガーM内のコンテナ-->
         <div class="container">
-          <p class="navbar-brand p-3"><%= link_to "logo", root_path %></p>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav float-end">
               <% if customer_signed_in? %>
                 <li class="nav-item col-auto">
-                  <%= link_to "マイページ", mypage_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to root_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-home fa-lg" style="color: #000000;"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item col-auto">
-                  <%= link_to "商品一覧", mypage_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to mypage_path, class: 'nav-link text-dark' do %>
+                  <i class="far fa-user fa-lg" style="color: #000000;"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item col-auto">
-                  <%= link_to "カート", mypage_path, class:"btn btn-outline-secondary" %>
+                  <%= link_to "商品一覧", items_path, class:"btn btn-outline-secondary" %>
                 </li>
                 <li class="nav-item col-auto">
-                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+                  <%= link_to cart_items_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
+                  <% end %>
                 </li>
               <% elsif admin_signed_in? %>
                  <li class="nav-item col-auto">
@@ -61,16 +123,18 @@
                   <%= link_to "商品一覧", root_path, class:"btn btn-outline-secondary"%>
                 </li>
                 <li class="nav-item col-auto">
-                  <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-secondary"%>
-                </li>
-                <li class="nav-item col-auto">
-                  <%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-secondary"%>
+                  <%= link_to new_customer_session_path, class: 'nav-link text-dark' do %>
+                  <i class="far fa-user fa-lg" style="color: #000000;"></i>
+                  <% end %>
                 </li>
               <% end %>
             </ul>
           </div>
         </div>
       </nav>
+      
+      
+      
     </header>
     <%= yield %>
   </body>

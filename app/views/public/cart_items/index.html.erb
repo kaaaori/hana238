@@ -1,0 +1,57 @@
+<div class="container">
+  <div data-cart-wrapper>
+    <div class="cart-header text-center my-5">
+      <h3 class="mb-3">ショッピングカート</h3>
+      <%= link_to "買い物を続ける", root_path %>
+    </div>
+    
+    <!--表示たいをコンパクトにする-->
+    <!--数量の変更はボタンを押さなくても合計金額が変わるようにする-->
+    <!--センター寄せにする-->
+    <div>
+      <table border="1", class="table" >
+        <thead>
+          <tr bgcolor="#e8e8e8">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+            <td>
+              <%= image_tag cart_item.item.get_image(50,50)%>
+              <%= cart_item.item.name %>
+            </td>
+            <td>￥<%= cart_item.item.with_tax_price%></td>
+            <td><%= form_with model: cart_item, url:cart_item_path(cart_item), method: :patch, data: { turbo: false } do |f| %>
+                <%= f.select :amount, *[1..10] %>
+                <%= f.submit "変更", class: "btn btn-success" %>
+                <% end %>
+            </td>
+            <td>￥<%= cart_item.subtotal %></td>
+            <% @total += cart_item.subtotal %>
+            <td>
+              <% if cart_item.customer == current_customer %>
+                <%= link_to "削除", cart_item_path(cart_item), method: :delete %>
+              <% end %>
+            </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      <%= link_to "カートを空にする", cart_items_destroy_all_path, class: "btn btn-danger", method: :delete %>
+      
+      <div class="text-center my-5"> 
+        <span>合計金額</span><span>￥<%= @total %></span>
+      </div>
+      <div class="text-center">
+        <%= link_to "レジへ進む", new_order_path, class: "btn btn-dark col-4" %>
+      </div>
+  </div>
+</div>

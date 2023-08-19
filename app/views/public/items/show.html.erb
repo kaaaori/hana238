@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-3">
+      <%= image_tag @item.get_image(150,150) %>
+    </div>
+    <div class="col-6">
+      <p><%= @item.name %></p>
+      <p><%= @item.introduction %></p>
+      <p>¥<%= @item.with_tax_price %>(税込)</p>
+      <%= form_with model: @cart_item, data: { turbo: false } do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.select :amount, *[1..10] %>
+        <%= f.submit "カートに入れる", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <h3 class="my-5 text-center">All List</h3>
+
+    <div class="row">
+    
+    <% @items.each do |item| %>
+    <h5 class="mb-3 text-left">
+      <%= item.category.name%>
+    </h5>
+      <div class="col">
+        <%= link_to item_path(item.id) do %>
+          <%= image_tag item.get_image(150,150) %>
+        <% end %>
+        <p><%= link_to item.name, item_path(item.id) %></p>
+        <p>¥<%= item.with_tax_price %></p>
+      </div>
+      <% end %>
+    </div>
+        <%= paginate @items %>
+    </div>
+  </div>
+</div>

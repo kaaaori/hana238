@@ -14,6 +14,7 @@ scope module: :public do
   root to: 'homes#top'
   get '/about' => 'homes#about'
   get '/mypage' => 'customers#show', as: 'mypage'
+  
   get '/customers/info/edit' => 'customers#edit'
   patch '/customers/info' => 'customers#update'
   patch '/customers/information' => 'customers#update'
@@ -23,8 +24,14 @@ scope module: :public do
   post '/orders/confirm' => 'orders#confirm'
   get '/orders/thanks' => 'orders#thanks'
   
-    
-  
+  resources :items, only: [:index, :show]
+  resources :orders, only: [:new, :create, :index, :show]
+  resources :cart_items, only: [:index, :update, :create, :destroy] do
+    member do
+      patch 'increase'
+      patch 'decrease'
+    end
+  end
 end
 
 namespace :admin do

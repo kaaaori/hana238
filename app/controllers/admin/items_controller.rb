@@ -24,12 +24,23 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
   end
   
   def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:notice] = "変更を保存しました"
+      redirect_to admin_item_path(@item.id)
+    else
+      render :edit
+    end
   end
   
   def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to items_path
   end
   
   private
