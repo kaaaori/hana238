@@ -3,15 +3,6 @@ class Public::ItemsController < ApplicationController
   
   def index
     @categories = Category.all
-    if params[:category]
-      @category = Category.find(params[:category])
-      @items = @category.items
-    else
-      @items = Item.all
-    end
-    
-    @items = Item.page(params[:page]).per(4)
-    ### @items = Item.order('id DESC').limit(8)
   end
   
   def show

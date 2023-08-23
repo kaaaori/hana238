@@ -1,0 +1,16 @@
+<div class="container">
+  <h3 class="my-5 text-center">
+    <%= @category.name%> List
+  </h3>
+  <div class="row">
+    <!--写真をセンター寄りにしたいスマホの時左よりになる-->
+    <% @items.each do |item| %>
+      <div class="mb-5 col justify-content-center">
+        <%= link_to item_path(item.id) do %>
+          <%= image_tag item.get_image(300,300) %>
+        <% end %>
+        <p><%= link_to item.name, item_path(item.id), class: "link-dark text-decoration-none" %> / ¥<%= item.with_tax_price %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

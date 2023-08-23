@@ -2,7 +2,8 @@ class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @items = Item.all
+    # @items = Item.all
+    @items = Item.order('id DESC').limit(4)
   end
   
   def new
@@ -42,6 +43,16 @@ class Admin::ItemsController < ApplicationController
     @item.destroy
     redirect_to items_path
   end
+  
+  # def set_item
+  #   # PATHパラメータでitemを取得
+  #   @item = Item.find(params[:id])
+  # end
+
+  # def set_comments
+  #   # itemに紐づくcommtnsを新着順で取得
+  #   @item_comments = @item.comments.includes(:user).order('created_at DESC')
+  # end
   
   private
   def item_params

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
+    before_action :set_all_categories
 
   private
   def configure_permitted_parameters
@@ -14,6 +15,10 @@ class ApplicationController < ActionController::Base
       :address_building,
       :phone_number
     ])
+  end
+  
+  def set_all_categories
+    @all_categories = Category.all
   end
 
 end

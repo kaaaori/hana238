@@ -8,6 +8,7 @@ class CreateDeliveryAddresses < ActiveRecord::Migration[6.1]
       t.string :address_street, null: false#番地
       t.string :address_building,   null: false#建物
       t.string :address_name,   null: false#宛名
+      t.string :phone_number,   null: false#電話番号
       t.timestamps
     end
   end

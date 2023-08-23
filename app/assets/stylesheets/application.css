@@ -14,6 +14,12 @@
  *= require_self
  */
 
-.navbar-toggler:focus {
+button.navbar-toggler {
   box-shadow: none !important;
+  border: none;
 }
+
+ul.dropdown-menu {
+  border: none;
+}
+/*cssの詳細度をあげたのでハンバーガーメニューの影＆外枠消せた*/

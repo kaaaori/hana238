@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2023_08_14_112100) do
     t.string "address_street", null: false
     t.string "address_building", null: false
     t.string "address_name", null: false
+    t.string "phone_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
