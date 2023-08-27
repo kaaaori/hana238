@@ -1,22 +1,17 @@
-<ul class="list-group list-group-flush">
-  <li class="list-group-item list-group-item-action">
+<ul class="list-gruop-inline">
+  <li class="list-inline-item list-inline-item-action ms-2">
     <%= link_to mypage_path, class: 'nav-link' do %>
-    <i class="far fa-user fa-lg" style="color: #525151;"></i>　会員登録情報
+    <i class="far fa-user fa-lg" style="color: #525151;"></i> 会員登録情報
     <% end %>
   </li>
-  <li class="list-group-item list-group-item-action">
+  <li class="list-inline-item list-inline-item-action ms-2">
     <%= link_to items_path, class: 'nav-link' do %>
-    <i class="fas fa-list" style="color: #525151;"></i>　ご注文履歴
+    <i class="fas fa-list" style="color: #525151;"></i> ご注文履歴
     <% end %>
   </li>
-  <li class="list-group-item list-group-item-action">
+  <li class="list-inline-item list-inline-item-action ms-2">
     <%= link_to delivery_addresses_path, class: 'nav-link' do %>
-    <i class="fas fa-truck" style="color: #525151;"></i>　お届け先の一覧
-    <% end %>
-  </li>
-  <li class="list-group-item list-group-item-action">
-    <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link' do  %>
-    <i class="fas fa-sign-out-alt fa-lg" style="color: #525151;"></i>　ログアウト
+    <i class="fas fa-truck" style="color: #525151;"></i> お届け先
     <% end %>
   </li>
 </ul>

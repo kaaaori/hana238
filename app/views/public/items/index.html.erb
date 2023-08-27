@@ -15,6 +15,7 @@
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.get_image(300,300)%>
           <% end %>
+          <%= "sold out" if item.inventory <= 0 %>
           <p><%= link_to item.name, item_path(item.id), class: "link-dark text-decoration-none" %> / ¥<%= item.with_tax_price %></p>
         </div>
       <% end %>

@@ -4,6 +4,7 @@
       <h4 class="my-4">
         <%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細
       </h4>
+      <!--エラー分日本語へ変換する&レイアウト整える-->
       <div class="errorblock">
         <% if @customer.errors.any? %>
           <div class="alert">

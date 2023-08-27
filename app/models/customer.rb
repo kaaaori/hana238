@@ -7,16 +7,15 @@ class Customer < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :delivery_addresses, dependent: :destroy
-  # schemaでnull: falseの記入をしている為、改めてpresence: trueは不必要がない
-  # validates :last_name, presence: true
-  # validates :first_name, presence: true
-  # validates :email, presence: true
-  # validates :phone_number, presence: true
-  # validates :postal_code, presence: true
-  # validates :prefecture_code, presence: true
-  # validates :address_city, presence: true
-  # validates :address_street, presence: true
   
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :email, presence: true
+  validates :phone_number, presence: true
+  validates :postal_code, presence: true
+  validates :prefecture_code, presence: true
+  validates :address_city, presence: true
+  validates :address_street, presence: true
          
   include JpPrefecture
   jp_prefecture :prefecture_code

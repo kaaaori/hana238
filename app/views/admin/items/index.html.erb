@@ -25,12 +25,11 @@
             <td><%= item.price %></td>
             <td><%= item.category.name %></td>
             <td>
-            <!--if item.inventory == 0 -->
-            <!--  sold out-->
-            <!--else-->
-            <!--  on sale-->
-            <!--end-->
-            <!--     販売中＆soldout+(在庫数)inventory %-->
+              <%#= item.inventory <= 0 ? "sold out" : item.inventory %>
+              <!--↑↓どちらでもOK-->
+              <%= admin_item_count(item.inventory) %>
+                <!--helpers（view用）にメソッド書いている-->
+            </td>
           </tr>
           <% end %>
         </tbody>

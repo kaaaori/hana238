@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     
     resources :items, only: [:index, :show]
     resources :orders, only: [:new, :create, :index, :show]
-    resources :delivery_addresses, only: [:new, :index, :create, :show, :edit, :update, :destroy]
+    resources :delivery_addresses, only: [:new, :index, :create, :edit, :update, :destroy]
     resources :categories, only: [:index] do
       scope module: :categories do
         resources :items, only: [:index]

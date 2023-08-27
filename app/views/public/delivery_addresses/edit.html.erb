@@ -1,1 +1,49 @@
-<h1>uuuuuuuuuu</h1>
+<%= render "error"%>
+<%= form_with model: @delivery_address, url: delivery_address_path do |f| %>
+
+<div class="container">
+<h3 class="my-5 text-center">お届け先の編集</h3>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :氏名 %><br />
+    <%= f.text_field :address_name, class: 'form-control' %>
+  </div>
+  <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
+    
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :郵便番号 %><br />
+    <%= f.text_field :postal_code , id: "customer_postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
+  </div>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :prefecture_code, '都道府県' %><br />
+    <!--47都道府県をプルダウンメニューで表示-->
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
+        id: 'customer_prefecture_code', class: 'form-control' %>
+  </div>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :address_city, '市区町村' %><br />
+    <%= f.text_field :address_city, autocomplete: 'address_city', id: "customer_address_city", class: 'form-control'%>
+  </div>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :address_street, '番地' %><br />
+    <%= f.text_field :address_street, autocomplete: 'address_street', id: "user_address_street", class: 'form-control'%>
+  </div>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :address_building, '建物' %><br/>
+    <%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control'%>
+  </div>
+  <div class="mb-3 col-6 mx-auto">
+    <%= f.label :電話番号 %><br />
+    <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要"%>
+  </div>
+  <%= f.hidden_field :customer_id, value: current_customer.id%>
+  <!--削除ボタンでdestroyしてindex遷移したい　linke_toでやるべき？-->
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col-2">
+      <%= f.submit "削除", class: 'form-control btn btn-light', method: :delete %>
+    </div>
+    <div class="col-2">
+      <%= f.submit "登録", class: "form-control btn btn-dark" %>
+    </div>
+  </div>
+</div>
+<% end %>

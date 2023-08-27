@@ -1,16 +1,24 @@
 <div class="container">
-  <div class="row my-5">
-    <div class="col-3">
+  <!--スマホレスポンシブセンターになっていない-->
+  <div class="my-5 row d-flex justify-content-center">
+    <div class="col-4">
       <%= image_tag @item.get_image(300,300) %>
     </div>
-    <div class="col-6">
+  </div>
+  <div class="my-5 row d-flex justify-content-center">
+    <div class="col-4 text_center">
       <p><%= @item.name %></p>
-      <p><%= @item.introduction %></p>
       <p>¥<%= @item.with_tax_price %>(税込)</p>
+      <p><%= @item.introduction %></p>
       <%= form_with model: @cart_item, data: { turbo: false } do |f| %>
         <%= f.hidden_field :item_id, :value => @item.id %>
-        <%= f.select :amount, *[1..10] %>
-        <%= f.submit "カートに入れる", class: "btn btn-success" %>
+        <% if @item.inventory <= 0 %>
+          <p style="color:red;">soldout</p>
+        <% else %>
+          <%= f.select :amount, *[1..@item.inventory] %>
+          <!--　↑ −数量＋　はjavascriptでやるが-->
+          <%= f.submit "カートに入れる", class: "btn btn-success" %>
+        <% end %>
       <% end %>
     </div>
   </div>
