@@ -11,6 +11,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :total,         null: false#商品合計
       t.integer :postage,       null: false#送料
       t.integer :payment_method,null: false#支払い方法
+      t.date    :delivery_day,  null: false#配送日
+      t.integer :delivery_time, null: false#配送時間
       t.timestamps
     end
   end

@@ -30,7 +30,6 @@ Rails.application.routes.draw do
         resources :items, only: [:index]
       end
     end
-    
     resources :cart_items, only: [:index, :update, :create, :destroy] do
       member do
         patch 'increase'

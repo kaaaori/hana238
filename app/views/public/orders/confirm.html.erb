@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <table border="1", class="table" >
+        <tr bgcolor="#e8e8e8">
+          <td>商品名</td>
+          <td>単価</td>
+          <td>数量</td>
+          <td>小計</td>
+        </tr>
+      
+        <% @total = 0 %>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td><%= image_tag cart_item.item.get_image(50,50)%>　<%= cart_item.item.name %></td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.subtotal %></td>
+              <% @total += cart_item.subtotal %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div calss="row">
+    <div class="col-4">
+      <table border="1", class="table">
+        <tr>
+          <td bgcolor="#e8e8e8" class="2">送料</td>
+          <td class="2">800</td>
+        </tr>
+        <tr>
+          <td bgcolor="#e8e8e8" class="2">商品合計</td>
+          <td class="2"><%= @total %></td>
+        </tr>
+        <tr>
+          <td bgcolor="#e8e8e8" class="2">請求金額</td>
+          <td class="2"><%= @total + 800 %></td>
+        </tr>
+      </table>
+      
+      <table>
+        <tr>
+          <th>支払い方法</th>
+          <td><%= @order.payment_method_i18n%></td>
+        </tr>
+        <tr>
+          <th>お届け先</th>
+          <td><%= @order.address_display %></td>
+        </tr>
+      </table>
+    </div>
+    
+    <!--擬似決済のフォームを入れるとOK-->
+    
+    
+  </div>
+      
+      <%= form_with model: @order_new , url: orders_path do |f| %>
+        <%= f.hidden_field :customer_id, value: current_customer.id %>
+        <%= f.hidden_field :payment_method, value:  @order.payment_method %>
+        <%= f.hidden_field :postage, value: 800 %>
+        <%= f.hidden_field :postal_code, value: @order.postal_code %>
+        <%= f.hidden_field :total, value: @total + 800%>
+        <%= f.hidden_field :address, value: @order.address%>
+        <%= f.hidden_field :address_name, value: @order.address_name %>
+        <%= f.submit "注文を確定する" %>
+      <% end %>
+      
+</div>

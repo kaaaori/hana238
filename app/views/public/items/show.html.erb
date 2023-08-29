@@ -1,10 +1,11 @@
 <div class="container">
-  <!--スマホレスポンシブセンターになっていない-->
+  <!--スマホレスポンシブセンターになっていない--colをなくすと解像度が荒すぎた-->
   <div class="my-5 row d-flex justify-content-center">
-    <div class="col-4">
+    <div class="col-8">
       <%= image_tag @item.get_image(300,300) %>
     </div>
   </div>
+  
   <div class="my-5 row d-flex justify-content-center">
     <div class="col-4 text_center">
       <p><%= @item.name %></p>

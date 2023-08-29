@@ -1,0 +1,46 @@
+<!--レイアウトNG-->
+<!--%= render "error"%>-->
+<%= form_with model: @order, url: orders_confirm_path do |f| %>
+
+<div class="container">
+  <h3 class="my-5 text-center">注文情報入力</h3>
+  
+  <h5 class="my-3 text-center">お届け先</h5>
+  <div class="row mb-3">
+    <p><%= f.radio_button :select_address, 0 %>　ご自身の住所</p>
+    〒 <%= current_customer.postal_code %>　<%= current_customer.address %>　｜<%= current_customer.last_name%> <%= current_customer.first_name%>
+  </div>
+  <div class="row mb-3">
+    <p><%= f.radio_button :select_address, 1 %>　登録住所から選択</p>
+    <%= f.select :delivery_address_id, options_from_collection_for_select(DeliveryAddress.all, :id, :address_all) %>
+  </div>
+  <div class="row mb-3">
+    <p> <%= f.radio_button :select_address, 2 %>　新しいお届け先</p>
+    <table>
+      <tr>
+        <td>郵便番号</td>
+        <td> <%= f.text_field :postal_code %></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <!--addressだとうまくいかなくてdeliveryのaddress_allだとうまくいったのがよくわからない-->
+        <td><%= f.text_field :address_all %></td>
+      </tr>
+      <tr>
+        <td>宛名</td>
+        <td><%= f.text_field :address_name %></td>
+      </tr> 
+    </table>
+  </div>
+  
+  <h5 class="my-3 text-center">配送日時</h5>
+    <%= f.date_field :delivery_day %>
+    <%= f.select :delivery_time, [ ["10:00-12:00",0], ["14:00-16:00", 1], ["16:00-18:00", 2 ] ], prompt: "以下から選択してください" %>
+    
+    
+    
+  <div class="row">
+   <%= f.submit "確認画面へ進む", class: "btn btn-primary col-2" %>
+  </div>
+</div>
+<% end %>
