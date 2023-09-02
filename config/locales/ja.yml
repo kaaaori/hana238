@@ -8,9 +8,9 @@
         credit_card: "クレジットカード"
         transfer: "銀行振込"
       delivery_time:
-        midmorning: "10:00-12:00"
-        middaytime: "14:00-16:00"
-        midafternoon: "16:00-18:00"
+        morning: "10:00-12:00"
+        daytime: "14:00-16:00"
+        afternoon: "16:00-18:00"
       
   activerecord:
     errors:

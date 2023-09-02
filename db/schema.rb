@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2023_08_14_112100) do
     t.integer "prefecture_code", null: false
     t.string "address_city", null: false
     t.string "address_street", null: false
-    t.string "address_building", null: false
+    t.string "address_building"
     t.string "address_name", null: false
     t.integer "total", null: false
     t.integer "postage", null: false

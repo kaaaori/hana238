@@ -22,9 +22,21 @@
         <td> <%= f.text_field :postal_code %></td>
       </tr>
       <tr>
-        <td>住所</td>
-        <!--addressだとうまくいかなくてdeliveryのaddress_allだとうまくいったのがよくわからない-->
-        <td><%= f.text_field :address_all %></td>
+        <td>都道府県</td>
+        <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
+        id: 'customer_prefecture_code' %></td>
+      </tr>
+      <tr>
+        <td>市区町村</td>
+        <td><%= f.text_field :address_city %></td>
+      </tr>
+      <tr>
+        <td>番地</td>
+        <td><%= f.text_field :address_street %></td>
+      </tr>
+      <tr>
+        <td>建物</td>
+        <td><%= f.text_field :address_building %></td>
       </tr>
       <tr>
         <td>宛名</td>
@@ -35,8 +47,7 @@
   
   <h5 class="my-3 text-center">配送日時</h5>
     <%= f.date_field :delivery_day %>
-    <%= f.select :delivery_time, [ ["10:00-12:00",0], ["14:00-16:00", 1], ["16:00-18:00", 2 ] ], prompt: "以下から選択してください" %>
-    
+    <%= f.select :delivery_time, Order.delivery_times_i18n.invert, prompt: "以下から選択してください" %>
     
     
   <div class="row">

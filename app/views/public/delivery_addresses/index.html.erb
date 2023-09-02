@@ -32,7 +32,7 @@
           <td bgcolor="#f5f5f5">電話番号</td>
           <td><%= @customer.phone_number %></td>
         </tr>
-        <!--テキスト右寄せにしたい＆リンク下線なしにしたい-->
+        <!--リンク先がカスタマーの住所変更ページへ遷移テキスト右寄せにしたい＆リンク下線なしにしたい-->
         <tr>
           <td></td>
           <td class="text-right"><%= link_to "編集する", customers_info_edit_path %></td>
@@ -64,7 +64,7 @@
         <!--テキスト右寄せにしたい＆リンク下線なしにしたい＆削除も作成したいが、右寄りに-->
         <tr>
           <td></td>
-          <td class="text-right text-decoration-none"><%= link_to "編集する", edit_delivery_address_path(id: delivery_address.id) %></td>
+          <td class="text-right text-decoration-none"><%= link_to "編集する", edit_delivery_address_path(id: delivery_address.id ) %></td>
         </tr>
       </table>
       <% end %>

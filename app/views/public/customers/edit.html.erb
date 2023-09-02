@@ -17,10 +17,10 @@
     
   <%= form_with model: @customer, url: customers_info_path do |f| %>
   <div class="row mt-3 mb-4 d-flex justify-content-center">
-    <div class="col-2">
+    <div class="col-2 me-2">
       <%= f.text_field :last_name, autofocus: true, id:"inputName", class: 'form-control' , placeholder:"姓" %>
     </div>
-    <div class="col-2">
+    <div class="col-2 ms-2">
       <%= f.text_field :first_name, autofocus: true, id:"inputName", class: 'form-control' , placeholder:"名" %>
     </div>
   </div>
@@ -33,7 +33,7 @@
     <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要"%>
   </div>
   <div class="d-grid gap-2 col-4 mx-auto">
-    <%= f.submit "編集内容を保存", class: "btn btn-primary" %>
+    <%= f.submit "編集内容を保存", class: "btn btn-dark" %>
   </div>
   
   <!--退会するボタンが上のsumitと同じサイズではないのが気になる-->
@@ -41,7 +41,7 @@
     <div class="row mt-5 mx-auto">
       <h7 class="mt-5  mb-3">ご退会される方は、こちらからお願いいたします。</h7>
         <div class="row d-flex justify-content-center mt-2">
-          <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-dark col-4" %>
+          <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-light col-4" %>
         </div>
     </div>
   </div>
