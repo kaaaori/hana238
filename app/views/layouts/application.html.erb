@@ -11,75 +11,103 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body class="d-flex flex-column vh-100">
     <header>
       <nav class="navbar navbar-light">
   	    <div class="container">
-  	      <!--画像センター寄りか左寄りか確認とる-->
-  	      <%= link_to image_tag('logo.png', width: 268, height: 78), root_path, class: 'sized navbar-brand' %>
+  	      <!--bootstrapのnavを活かしきれていない-->
+  	      <%= link_to image_tag('logo.png', width: 255, height: 65), root_path, class: 'sized navbar-brand' %>
   		    <div class="float-end">
       			<ul class="list-inline mt-5">
               <% if customer_signed_in? %>
-                <li class="list-inline-item ms-2">
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
       				    <%= link_to root_path, class: 'nav-link text-center' do %>
       				    <i class="fas fa-home fa-lg" style="color: #000000;"></i>
-      				  <% end %>
-      				  <!--アイコン下に文字入れるなら→<p class='nav-link text-dark'>home</p>-->
+      				    <% end %>
+      				    <p class='nav-link text-dark'>home</p>
       				  </li>
-                <li class="list-inline-item ms-2">
-                  <%= link_to mypage_path, class: 'nav-link' do %>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to mypage_path, class: 'nav-link text-center' do %>
                   <i class="far fa-user fa-lg" style="color: #000000;"></i>
                   <% end %>
+                  <p class='nav-link text-dark'>mypage</p>
                 </li>
-                <li class="list-inline-item ms-2">
-                  <%= link_to cart_items_path, class: 'nav-link' do %>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to items_path, class: 'nav-link text-center' do %>
+                  <i class="fas fa-seedling fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                  <p class='nav-link text-dark'>item</p>
+                </li>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to cart_items_path, class: 'nav-link text-center' do %>
                   <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
                   <% end %>
+                  <p class='nav-link text-dark'>cart</p>
                 </li>
-                <li class="list-inline-item ms-2">
-                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link' do %>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to root_path, method: :delete, class: 'nav-link text-center' do %>
+                  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                  <p class='nav-link text-dark'>contact</p>
+                </li>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-center' do %>
                   <i class="fas fa-sign-out-alt fa-lg" style="color: #000000;"></i>
                   <% end %>
+                  <p class='nav-link text-dark'>logout</p>
                 </li>
       				<% elsif admin_signed_in? %>
-      				  <li class="list-inline-item ms-2">
-      				    <%= link_to "top", root_path, class:"btn btn-outline-secondary" %>
-      				  </li>
-      				   <li class="list-inline-item ms-2">
+      				  <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to "商品一覧", admin_items_path, class:"btn btn-outline-secondary" %>
                 </li>
-                 <li class="list-inline-item ms-2">
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to "会員一覧", admin_customers_path, class:"btn btn-outline-secondary" %>
                 </li>
-                 <li class="list-inline-item ms-2">
+               <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to "注文履歴一覧", admin_root_path, class:"btn btn-outline-secondary" %>
                 </li>
-                 <li class="list-inline-item ms-2">
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to "カテゴリ一覧", admin_categories_path, class:"btn btn-outline-secondary" %>
                 </li>
-                <li class="list-inline-item ms-2">
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-secondary" %>
                 </li>
       				<% else %>
-      				  <li class="list-inline-item ms-2">
-      				    <%= link_to root_path, class: 'nav-link' do %>
+      				  <li class="list-inline-item ms-2 d-none d-md-inline-block">
+      				    <%= link_to root_path, class: 'nav-link text-center' do %>
       				    <i class="fas fa-home fa-lg" style="color: #000000;"></i>
-      				  <% end %>
+      				    <% end %>
+      				    <p class='nav-link text-dark'>home</p>
       				  </li>
-      				  <li class="list-inline-item ms-2">
-                  <%= link_to new_customer_session_path, class: 'nav-link' do %>
-                  <i class="far fa-user fa-lg" style="color: #000000;"></i>
+      				  <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to new_customer_session_path, class: 'nav-link text-center' do %>
+                  <i class="fas fa-sign-in-alt fa-lg" style="color: #000000;"></i>
                   <% end %>
+                  <p class='nav-link text-dark'>login</p>
                 </li>
-                <li class="list-inline-item ms-2">
-                  <%= link_to cart_items_path, class: 'nav-link' do %>
-                  <i class="fas fa-shopping-cart fa-lg" style="color: #000000;"></i>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to new_customer_registration_path, class: 'nav-link text-center' do %>
+                  <i class="fas fa-user-plus fa-lg" style="color: #000000;"></i>
                   <% end %>
+                  <p class='nav-link text-dark'>signup</p>
+                </li>
+                 <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to items_path, class: 'nav-link text-center' do %>
+                  <i class="fas fa-seedling fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                  <p class='nav-link text-dark'>item</p>
+                </li>
+                <li class="list-inline-item ms-2 d-none d-md-inline-block">
+                  <%= link_to root_path, method: :delete, class: 'nav-link text-center' do %>
+                  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>
+                  <% end %>
+                  <p class='nav-link text-dark'>contact</p>
                 </li>
       				<% end %>
-      				<li class="list-inline-item ms-2">
+      				<li class="list-inline-item d-md-none">
       				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
                   <span class="navbar-toggler-icon"></span>
@@ -88,12 +116,41 @@
       			</ul>
       		</div>
       	</div>
-      	<!--ハンバーガーM内のコンテナ-->
-      	<!--メニューを縦一覧ではなく横一覧にしたい-->
+      	<!--ハンバーガーM内容/文字のみにしたいので上と分けてしまった/リファクタリングしたい箇所-->
         <div class="container">
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav float-end">
-              <% if admin_signed_in? %>
+              <% if customer_signed_in? %>
+                <li class="nav-item col-auto">
+                  <%= link_to "home", root_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item col-auto">
+                  <%= link_to "mypage", mypage_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item dropdown col-auto">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Item
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><%= link_to "All", items_path, class: "dropdown-item link-dark" %></li>
+                    <% @all_categories.each do |category| %>
+                      <li><%= link_to category.name, category_items_path(category.id), class: "dropdown-item link-dark" %></li>
+                    <% end %>
+                  </ul>
+                </li>
+                <li class="nav-item col-auto">
+                  <%= link_to "cart", cart_items_path, class: 'nav-link' %>
+                </li>
+                <!--<li class="nav-item col-auto">-->
+                <!--  <%= link_to "photogallery", root_path, class: 'nav-link' %>-->
+                <!--</li>-->
+                <li class="nav-item col-auto">
+                  <%= link_to "contact", root_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item col-auto">
+                  <%= link_to "logout", destroy_customer_session_path, method: :delete, class: 'nav-link' %>
+                </li>
+              <% elsif admin_signed_in? %>
                 <li class="nav-item col-auto">
                   <%= link_to "商品一覧", admin_items_path, class: 'nav-link' %>
                 </li>
@@ -111,7 +168,13 @@
                 </li>
               <% else %>
                 <li class="nav-item col-auto">
-                  <%= link_to "about", root_path, class: 'nav-link' %>
+                  <%= link_to "home", root_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item col-auto">
+                  <%= link_to "login", new_customer_session_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item col-auto">
+                  <%= link_to "signup", new_customer_registration_path, class: 'nav-link' %>
                 </li>
                 <li class="nav-item dropdown col-auto">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -124,9 +187,9 @@
                     <% end %>
                   </ul>
                 </li>
-                <li class="nav-item col-auto">
-                  <%= link_to "photogallery", root_path, class: 'nav-link' %>
-                </li>
+                <!--<li class="nav-item col-auto">-->
+                <!--  <%= link_to "photogallery", root_path, class: 'nav-link' %>-->
+                <!--</li>-->
                 <li class="nav-item col-auto">
                   <%= link_to "contact", root_path, class: 'nav-link' %>
                 </li>
@@ -136,6 +199,8 @@
         </div>
       </nav>
     </header>
+    <!--flashのレイアウトはあとで-->
+    <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
   </body>
 </html>

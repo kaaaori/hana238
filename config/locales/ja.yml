@@ -2,6 +2,7 @@
   # time:
   #   formats:
   #     default: "%Y/%m/%d %H:%M:%S"
+  
   enums:
     order:
       payment_method:
@@ -19,6 +20,31 @@
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      customer:
+        last_name: "姓"
+        first_name: "名"
+        password: "パスワード"
+        email: "メールアドレス"
+        postal_code: "郵便番号"
+        prefecture_code: "県名"
+        address_city: "市区町村"
+        address_street: "番地"
+        phone_number: "電話番号"
+      delivery_address:
+        address_name: "宛名"
+        postal_code: "郵便番号"
+        prefecture_code: "県名"
+        address_city: "市区町村"
+        address_street: "番地"
+        phone_number: "電話番号"
+      item:
+        name: "商品名"
+        category_id: "カテゴリー"
+        introduction: "商品説明"
+        price: "税抜価格"
+        inventory: "在庫数"
+        
   date:
     abbr_day_names:
     - 日

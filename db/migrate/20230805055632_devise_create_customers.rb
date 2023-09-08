@@ -39,7 +39,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.integer :prefecture_code,   null: false#県名
       t.string :address_city,   null: false#市区町村
       t.string :address_street, null: false#番地
-      t.string :address_building,   null: false#建物
+      t.string :address_building#建物
       t.string :phone_number, null: false#電話番号
       t.boolean :is_deleted,      null: false, default: false#退会ステータス
       t.timestamps null: false

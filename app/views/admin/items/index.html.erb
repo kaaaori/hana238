@@ -1,39 +1,44 @@
 <div class="container">
-  <h3 class="mt-5 mb-3 text-center">商品一覧</h3>
-  
-  <div class="row mb-3 d-flex justify-content-end">
+  <h3 class="my-5 text-center">商品一覧
     <%= link_to new_admin_item_path, class:"mt-3 col-1" do %>
-      <i class="fas fa-plus-circle fa-lg" style="color: #0f0f0f;"></i>
+      <i class="fas fa-plus-circle fa-sm" style="color: #a58f69;"></i>
     <% end %>
-  </div>
-  <div class="row mb-3 d-flex justify-content-center">
-    <table class="table">
+  </h3>
+  <div class="row">
+    <div class="col-12 col-md-8 mx-auto">
+    <table class="table table-hover">
       <thead>
         <tr>
-          <th>商品ID</th>
+          <th class="col-1">ID</th>
           <th>商品名</th>
           <th>税抜価格</th>
-          <th>ジャンル名</th>
-          <th>ステータス</th>
+          <th>カテゴリー</th>
+          <th>在庫</th>
         </tr>
       </thead>
-        <tbody>
-          <% @items.each do |item| %>
-          <tr>
-            <td><%= item.id %></td>
-            <td><%= link_to item.name, admin_item_path(item.id) %></td>
-            <td><%= item.price %></td>
-            <td><%= item.category.name %></td>
-            <td>
-              <%#= item.inventory <= 0 ? "sold out" : item.inventory %>
-              <!--↑↓どちらでもOK-->
-              <%= admin_item_count(item.inventory) %>
-                <!--helpers（view用）にメソッド書いている-->
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr
+          data-controller="href"
+          data-action="click->href#toHref keydown->href#enterToHref"
+          data-href="<%= admin_item_path(item.id) %>"
+          tabindex="0"
+          role="link"
+          style="cursor: pointer;">
+          <td class="col-1"><%= item.id %></td>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td><%= item.category.name %></td>
+          <td>
+            <%#= item.inventory <= 0 ? "sold out" : item.inventory %>
+            <!--↑↓どちらでもOK-->
+            <%= admin_item_count(item.inventory) %>
+              <!--helpers（view用）にメソッド書いている-->
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     </div>
   </div>
 </div>

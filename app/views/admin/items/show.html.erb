@@ -1,53 +1,50 @@
 <div class="container">
-  <h3 class="mt-5 text-center">商品詳細</h3>
-  
-  <!--全体的にセンタ揃え＆テーブル幅短くする-->
+  <h3 class="my-5 text-center">商品詳細</h3>
+  <!--全体的にセンタ揃え＆imgサイズと位置をいい感じにしたい-->
   <div class="row d-flex justify-content-center mt-5 mb-3">
     <div class="d-block mx-auto img-fluid w-50">
       <%= image_tag @item.get_image(300,300) %>
     </div>
   </div>
-        <%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
-          <table class="table">
-            <tbody>
-              <tr></tr>
-              <tr>
-                <td>商品名</td>
-                <td><%= @item.name %></td>
-              </tr>
-              <tr>
-                <td>商品説明</td>
-                <td><%= @item.introduction %></td>
-              </tr>
-              <tr>
-                <td>カテゴリー</td>
-                <td><%= @item.category.name %></td>
-              </tr>
-              <tr>
-                <td>税込価格<br>
-                (税抜価格)</td>
-                <td><%= @item.price %></td>
-              </tr>
-              <tr>
-                <td>在庫数</td>
-                <td><%= @item.inventory %></td>
-              </tr>
-            </tbody>
-          </table>
-        <% end %>
+  <div class="row">
+  <%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
+    <table class="table col-12 col-md-8 col-lg-6">
+      <tr>
+        <td class="col-3 col-md-1">商品</td>
+        <td><%= @item.name %></td>
+      </tr>
+      <tr>
+        <td class="col-3 col-md-1">説明</td>
+        <td><%= @item.introduction %></td>
+      </tr>
+      <tr>
+        <td class="col-3 col-md-1">カテゴリ</td>
+        <td><%= @item.category.name %></td>
+      </tr>
+      <tr>
+        <td class="col-3 col-md-1">税抜価格</td>
+        <td>￥<%= @item.price %></td>
+      </tr>
+      <tr>
+        <td class="col-3 col-md-1">税込価格</td>
+        <td>￥<%= @item.with_tax_price %></td>
+      </tr>
+      <tr>
+        <td class="col-3 col-md-1">在庫数</td>
+        <td><%= @item.inventory %></td>
+      </tr>
+    </table>
+  <% end %>
   </div>
-  
-  <div class="row d-flex justify-content-center mt-2">
-    <div class="col-1">
-      <%= link_to "編集", edit_admin_item_path, class: "form-control btn btn-sm btn-light" %>
+  <div class="row d-flex justify-content-center my-2">
+    <div class="col-3 col-md-2 col-lg-1">
+      <%= link_to "編集", edit_admin_item_path, class: "form-control btn btn-sm btn-outline-dark" %>
     </div>
-    <div class="col-1">
-      <%= link_to "削除", edit_admin_item_path, class: "form-control btn btn-sm btn-danger", method: :delete %>
+    <div class="col-3 col-md-2 col-lg-1">
+      <%= link_to "削除", admin_items_path(@item.id), class: "form-control btn btn-sm btn-outline-danger", method: :delete %>
+    </div>
+    <div class="col-3 col-md-2 col-lg-1">
+      <%= link_to "一覧", admin_items_path, class: "form-control btn btn-sm btn-outline-primary" %>
     </div>
   </div>
-  
-  <!--一つ前に戻るボタンにしたい＋右寄せ-->
-    <div class="row text-right mt-2">
-      <%= link_to "BACK", admin_items_path %>
-    </div>
 </div>

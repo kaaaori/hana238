@@ -1,66 +1,64 @@
+<%= render "public/shared/error_messages", resource: resource %>
 <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer' do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
   
   <div class="container">
-    <h3 class="mt-5 text-center">新規登録</h3>
-    <h5 class="mt-5 mb-3 text-center">以下の項目を入力して下さい</h5>
+    <h3 class="my-5 text-center">新規登録</h3>
+    <h5 class="mb-3 text-center">以下の項目を入力して下さい</h5>
     
     <div class="row mb-3 d-flex justify-content-center">
-      <div class="col-3">
-        <%= f.text_field :last_name , class: 'form-control', placeholder:"姓" %>
+      <div class="col-5 col-md-4 col-lg-3 me-1">
+        <%= f.text_field :last_name, autofocus: true, class: 'form-control', placeholder:"姓" %>
       </div>
-      <div class="col-3">
-        <%= f.text_field :first_name , class: 'form-control', placeholder:"名" %>
+      <div class="col-5 col-md-4 col-lg-3 ms-1">
+        <%= f.text_field :first_name, class: 'form-control', placeholder:"名" %>
       </div>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :メールアドレス %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder:"name@example.com"%>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :電話番号 %><br />
-      <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要"%>
+      <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要" %>
     </div>
-  　<!--<head>-->
+  　<head>
       <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
-    <!--</head>-->
-    <div class="mb-3 col-6 mx-auto">
+    </head>
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :郵便番号 %><br />
       <%= f.text_field :postal_code , id: "customer_postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :prefecture_code, '都道府県' %><br />
       <!--47都道府県をプルダウンメニューで表示-->
       <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
           id: 'customer_prefecture_code', class: 'form-control' %>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :address_city, '市区町村' %><br />
       <%= f.text_field :address_city, autocomplete: 'address_city', id: "customer_address_city", class: 'form-control'%>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :address_street, '番地' %><br />
       <%= f.text_field :address_street, autocomplete: 'address_street', id: "user_address_street", class: 'form-control'%>
     </div>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :address_building, '建物' %><br/>
       <%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control'%>
     </div>
-     <%# エラー分の日本語対応%>
-    <div class="mb-3 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :password, 'パスワード' %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %>桁以上)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password" , class: 'form-control'%>
     </div>
-    <div class="mb-5 col-6 mx-auto">
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :password_confirmation , 'パスワード確認用' %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: 'form-control'%>
     </div>
-    <div class="d-grid gap-2 col-6 mx-auto mb-5">
-      <%= f.submit "新規会員登録", class: "btn btn-sm btn-dark" %>
+    <div class="mb-3 text-center">
+      <%= f.submit "新規会員登録", class: "btn btn-sm btn-dark col-4 col-lg-2" %>
     </div>
   </div>
-  
 <% end %>

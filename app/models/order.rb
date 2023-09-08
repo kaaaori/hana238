@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   validates :prefecture_code, presence: true
   validates :address_city, presence: true
   validates :address_street, presence: true
-  validates :address_building, presence: true
+  # validates :address_building, presence: true
   validates :address_name, presence: true
   validates :total, presence: true
   validates :postage, presence: true#配送料

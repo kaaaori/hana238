@@ -1,73 +1,74 @@
 <div class="container">
-  <h3 class="my-5 text-center">My page</h3>
+  <h3 class="my-3 text-center">My page</h3>
   <div class="row text-center">
     <%= render 'public/customers/sidebar' %>
   </div>
+  
   <h5 class="text-center my-3">お届け先の追加 
     <%= link_to new_delivery_address_path, class:"mt-3 col-1" do %>
       <i class="fas fa-plus-circle" style="color: #525151;"></i>
     <% end %>
   </h5>
-  
   <div class="row d-flex justify-content-center">
-    <div class="col-5">
+    <div class="col-md-10 col-lg-6 mx-auto">
       <table class="table table-borderless", border="1">
         <tr>
-          <td bgcolor="#f5f5f5">デフォルト</td>
-          <td></td>
+          <td colspan="2">デフォルト</td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">宛名</td>
+          <td class="col-3">宛名</td>
           <td><%= @customer.last_name + @customer.first_name %></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">郵便番号</td>
+          <td class="col-3">郵便番号</td>
           <td>〒<%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">住所</td>
+          <td class="col-3">住所</td>
           <td><%= @customer.address %></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">電話番号</td>
+          <td class="col-3">電話番号</td>
           <td><%= @customer.phone_number %></td>
         </tr>
-        <!--リンク先がカスタマーの住所変更ページへ遷移テキスト右寄せにしたい＆リンク下線なしにしたい-->
         <tr>
           <td></td>
-          <td class="text-right"><%= link_to "編集する", customers_info_edit_path %></td>
+          <td align="right"><%= link_to "編集する", customers_info_edit_path, class: "btn btn-light btnx--outline-indigo btn-sm me-1" %></td>
         </tr>
       </table>
     </div>
   </div>
-      <!---->
+  <!--以下新規追加住所-->
   <div class="row d-flex justify-content-center">
-    <div class="col-5">
+    <div class="col-md-10 col-lg-6 mx-auto">
       <% @delivery_addresses.each do |delivery_address| %>
       <table class="table table-borderless", border="1">
         <tr>
-          <td bgcolor="#f5f5f5">宛名</td>
+          <td class="col-3">宛名</td>
           <td><%= delivery_address.address_name%></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">郵便番号</td>
+          <td class="col-3">郵便番号</td>
           <td>〒<%= delivery_address.postal_code %></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">住所</td>
+          <td class="col-3">住所</td>
           <td><%= delivery_address.address %></td>
         </tr>
         <tr>
-          <td bgcolor="#f5f5f5">電話番号</td>
+          <td class="col-3">電話番号</td>
           <td><%= delivery_address.phone_number %></td>
         </tr>
-        <!--テキスト右寄せにしたい＆リンク下線なしにしたい＆削除も作成したいが、右寄りに-->
         <tr>
           <td></td>
-          <td class="text-right text-decoration-none"><%= link_to "編集する", edit_delivery_address_path(id: delivery_address.id ) %></td>
+          <td  align="right">
+            <%= link_to "削除する", delivery_address_path(delivery_address.id), method: :delete, class: "btn btn-light btnx--outline-indigo btn-sm" %>
+            <%= link_to "編集する", edit_delivery_address_path(id: delivery_address.id), class: "btn btn-light btnx--outline-indigo btn-sm" %>
+          </td>
         </tr>
       </table>
       <% end %>
     </div>
   </div>
+  <%= paginate @delivery_addresses %>
 </div>

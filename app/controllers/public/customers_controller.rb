@@ -19,7 +19,6 @@ class Public::CustomersController < ApplicationController
   end
   
   def unsubscribe #登録解除画面
-    
   end
 
   def withdrawal #退会
@@ -29,7 +28,6 @@ class Public::CustomersController < ApplicationController
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
   end
-  
   
   private
   def customer_params

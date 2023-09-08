@@ -1,4 +1,9 @@
-<div class="container text-center">
+<div class="container">
+  <h3 class="my-3 text-center">My page</h3>
+  <div class="row text-center">
+    <%= render 'sidebar' %>
+  </div>
+  <div class="container text-center">
   <h5 class="mt-5 mb-3 my-4">退会手続き</h5>
   <div class="row d-flex justify-content-center mt-2">
     <p>退会をすると、会員登録情報や</p>
@@ -7,8 +12,9 @@
   </div>
   
   <div class="d-flex justify-content-center mt-5">
-    <%= button_to '退会する', customers_withdrawal_path, method: :patch, class: 'btn btn-danger', data: { confirm: '本当に退会しますか？' } %>
+    <%= button_to '退会する', customers_withdrawal_path, method: :patch, class: 'btn btn-outline-danger', data: { confirm: '本当に退会しますか？' } %>
     <div class="custom-gap"></div>
-    <%= button_to '退会しない', mypage_path, method: :get, class: 'btn btn-primary' %>
+    <%= button_to '退会しない', mypage_path, method: :get, class: 'btn btn-outline-primary' %>
+  </div>
   </div>
 </div>

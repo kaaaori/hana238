@@ -1,0 +1,30 @@
+注文履歴一覧
+<div class="container">
+  <div class="mx-auto col-8">
+    <div class="row">
+      <table class="table table-hoever table-inverse">
+        <thead>
+          <tr bgcolor="#e8e8e8">
+            <td>購入日時</td>
+            <td>購入者</td>
+            <td>注文個数</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= link_to  admin_order_path(order.id) do %>
+                  <%=  l order.created_at %>
+                <% end %>
+              </td>
+              <td><%= order.address_name%></td>
+              <td><%= order.order_details.sum(:amount) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @customers %>
+    </div>
+  </div>
+</div>

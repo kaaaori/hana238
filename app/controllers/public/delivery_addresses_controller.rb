@@ -4,6 +4,9 @@ class Public::DeliveryAddressesController < ApplicationController
   def index
     @customer = current_customer
     @delivery_addresses = @customer.delivery_addresses
+    # カミナリpagenation反映されていない
+    @delivery_addresses = @customer.delivery_addresses.page(params[:page]).per(5)
+    
   end
   
   def new
@@ -36,8 +39,12 @@ class Public::DeliveryAddressesController < ApplicationController
   
   def destroy
     @delivery_address = DeliveryAddress.find(params[:id])
-    @delivery_address.destroy
-    redirect_to delivery_addresses_path
+    if @delivery_address.destroy
+      redirect_to delivery_addresses_path, notice: "削除しました"
+    else
+      flash.now[:danger] = "削除に失敗しました"
+      render :index
+    end
   end
   
   

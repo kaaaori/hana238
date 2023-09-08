@@ -1,30 +1,43 @@
 <div class="container">
   <h3 class="my-5 text-center">会員一覧</h3>
-    <div class="row d-flex justify-content-center">
-      <!--td幅が広すぎる&行すべてがリンクになるようにしたい（商品一覧も同様に）-->
-      <table class="table table-hover w-50 text-center">
-        <thead>
-          <tr>
-            <th class="col-1">ID</th>
-            <th class="col-2">氏名</th>
-            <th class="col-2">ステータス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @customers.each do |customer| %>
-          <tr>
-            <td><%= customer.id %></td>
-            <td><%= link_to customer.last_name + " " + customer.first_name, admin_customer_path(customer.id), class: "text-decoration-none" %></td>
-            <td><% if customer.is_deleted %>
-                  退会
-                <% else %>
-                  有効
-                <% end %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
+  <div class="row">
+    <div class="col-10 col-lg-8 mx-auto">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>氏名</th>
+          <th class="d-none d-md-block">メールアドレス</th>
+          <th>ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+        <tr
+         data-controller="href"
+          data-action="click->href#toHref keydown->href#enterToHref"
+          data-href="<%= admin_customer_path(customer.id) %>"
+          tabindex="0"
+          role="link"
+          style="cursor: pointer;">
+          <td><%= customer.id %></td>
+          <td><%= customer.last_name + " " + customer.first_name %></td>
+          <td class="d-none d-md-block"><%= customer.email %></td>
+          <td><% if customer.is_deleted %>
+                退会
+              <% else %>
+                有効
+              <% end %>
+          </td>
+          <td>
+            <i class="fas fa-receipt" style="color: #a2bdec;"></i>詳細
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
       </table>
     </div>
   </div>
+  <!--ページネーション入れる（２０）-->
 </div>

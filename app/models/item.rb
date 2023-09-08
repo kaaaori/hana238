@@ -3,6 +3,11 @@ class Item < ApplicationRecord
   belongs_to :category
   has_many :cart_items, dependent: :destroy
   has_many :order_details
+  validates :name, presence: true
+  validates :category_id, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
+  validates :inventory, presence: true
   
   def get_image(width, height)
     unless image.attached?
@@ -15,6 +20,10 @@ class Item < ApplicationRecord
   ## 消費税を求めるメソッド
   def with_tax_price
       (price * 1.1).floor
+  end
+  
+  def enough_inventory?(amount)
+    inventory - amount >= 0
   end
   
 end

@@ -1,20 +1,19 @@
-<!--エラー分日本語へ変換する&レイアウト整える-->
 <div class="errorblock">
   <% if @customer.errors.any? %>
     <div class="alert">
-      <h3><%= @customer.errors.count %> error prohibited this obj from being saved:</h3>
+      <h5>以下の内容を入力してください</h5>
         <ul>
-          <% @coustomer.errors.full_messages.each do |message| %>
+          <% @customer.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
     </div>
   <% end %>
 </div>
-
 <%= form_with model: @customer, url: admin_customer_path do |f| %>
+
 <div class="container">
-  <h3 class="my-5 text-center"><%= @customer.last_name %> <%= @customer.first_name %> さんの会員詳細</h3>
+  <h3 class="my-5 text-center"><%= @customer.last_name %> <%= @customer.first_name %> さんの詳細編集</h3>
     <div class="row mb-3 d-flex justify-content-center">
       <div class="col-6 mx-auto">
         会員ID　<%= @customer.id %>

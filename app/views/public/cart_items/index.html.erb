@@ -2,10 +2,8 @@
   <div data-cart-wrapper>
     <div class="cart-header text-center my-5">
       <h3 class="mb-3">ショッピングカート</h3>
-      <%= link_to "買い物を続ける", root_path %>
+      <%= link_to "買い物を続ける", items_path %>
     </div>
-    
-    <!--表示たいをコンパクトにする-->
     <!--数量の変更はボタンを押さなくても合計金額が変わるようにする-->
     <!--センター寄せにする-->
     <!--ページの挙動が変-->
@@ -13,7 +11,7 @@
       <table border="1", class="table" >
         <thead>
           <tr bgcolor="#e8e8e8">
-            <th>商品名</th>
+            <th>商品</th>
             <th>単価(税込)</th>
             <th>数量</th>
             <th>小計</th>
@@ -29,7 +27,7 @@
             </td>
             <td>￥<%= cart_item.item.with_tax_price%></td>
             <td><%= form_with model: cart_item, url:cart_item_path(cart_item), method: :patch, data: { turbo: false } do |f| %>
-                <%= f.select :amount, *[1..10] %>
+                <%= f.select :amount, *[1..cart_item.item.inventory] %>
                 <%= f.submit "変更", class: "btn btn-success" %>
                 <% end %>
             </td>
@@ -55,4 +53,5 @@
         <%= link_to "レジへ進む", new_order_path, class: "btn btn-dark col-4" %>
       </div>
   </div>
+  <!--%= paginate @cart_items %>-->
 </div>

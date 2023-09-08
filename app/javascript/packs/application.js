@@ -31,3 +31,6 @@ $(function() {
     },
   });
 });
+
+// https://zenn.dev/necocoa/articles/rails-stimulus-tr-link参照
+import "controllers"

@@ -6,11 +6,12 @@ class Public::CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
     @items = Item.all
     @total = 0
+    # @cart_items = Cart_Item.page(params[:page]).per(10)
   end
 
   def create
-    if CartItem.find_by(item_id: params[:cart_item][:item_id]).present?
-      cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id])
+    cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+    if cart_item.present?
       cart_item.amount += params[:cart_item][:amount].to_i
       cart_item.update(amount: cart_item.amount)
       redirect_to cart_items_path

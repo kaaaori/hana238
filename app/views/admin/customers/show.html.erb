@@ -1,8 +1,7 @@
 <div class="container">
-  <h3 class="my-5 text-center"><%= @customer.last_name %> <%= @customer.first_name %> さんの会員詳細</h3>
-  <div class="row d-flex justify-content-center mt-5">
-    <div class="col-5">
-    <!--真ん中によっていない＆セルtd余白？が広いので狭めたい-->
+  <h3 class="my-5 text-center"><%= @customer.last_name %> <%= @customer.first_name %> さんの詳細</h3>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 col-lg-6 mx-auto">
     <table class="table table-borderless", border="1">
       <tr>
         <th>ID</th>
@@ -10,11 +9,11 @@
       </tr>
       <tr>
         <th>氏名</td>
-        <td><%= @customer.last_name %><%= @customer.first_name %></td>
+        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
       </tr>
       <tr>
         <th>郵便番号</td>
-        <td><%= @customer.postal_code %></td>
+        <td>〒<%= @customer.postal_code %></td>
       </tr>
       <tr>
         <th>住所</th>
@@ -31,20 +30,18 @@
       <tr>
         <th>ステータス</th>
         <td><% if @customer.is_deleted %>
-          <p style="color:red;">退会済み</p>
-        <% else %>
-          有効
-        <% end %></td>
-      </tr>
-      <!--テキスト右寄せにしたい＆リンク下線なしにしたい-->
-      <tr>
-        <td></td>
-        <td class="text-decoration-none"><%= link_to "編集する", edit_admin_customer_path %></td>
+              <p style="color:red;">退会済み</p>
+            <% else %>
+            有効
+            <% end %>
+        </td>
       </tr>
       <tr>
         <td></td>
-        <!--@customer.last_nameさんの注文履歴としたい-->
-        <td class="text-decoration-none"><%= link_to "注文履歴一覧", admin_order_path %></td>
+        <td align="right">
+          <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-outline-dark btn-sm" %>
+          <%= link_to "注文履歴", admin_order_path, class: "btn btn-outline-primary btn-sm" %>
+        </td>
       </tr>
     </table>
     </div>

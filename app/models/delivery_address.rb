@@ -6,7 +6,7 @@ class DeliveryAddress < ApplicationRecord
   validates :prefecture_code, presence: true
   validates :address_city, presence: true
   validates :address_street, presence: true
-  validates :address_building, presence: true
+  # validates :address_building, presence: true
   validates :address_name, presence: true
   validates :phone_number, presence: true
   

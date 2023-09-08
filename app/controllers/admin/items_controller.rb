@@ -15,7 +15,7 @@ class Admin::ItemsController < ApplicationController
       flash[:notice] = "新規登録をしました"
       redirect_to admin_item_path(@item.id)
     else
-      render :index
+      render :new
     end
   end
   
@@ -39,8 +39,12 @@ class Admin::ItemsController < ApplicationController
   
   def destroy
     @item = Item.find(params[:id])
-    @item.destroy
-    redirect_to items_path
+    if @item.destroy
+      redirect_to items_path, notice: "削除しました"
+    else
+      flash.now[:danger] = "削除に失敗しました"
+      render :index
+    end
   end
   
   private

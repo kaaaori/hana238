@@ -1,5 +1,10 @@
 <!--レイアウトNG-->
 <!--%= render "error"%>-->
+<% if @order.errors.present? %>
+  <% @order.errors.full_messages.each do |msg| %>
+    <%= msg %>
+  <% end %>
+<% end %>
 <%= form_with model: @order, url: orders_confirm_path do |f| %>
 
 <div class="container">

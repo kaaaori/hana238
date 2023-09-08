@@ -23,3 +23,12 @@ ul.dropdown-menu {
   border: none;
 }
 /*cssの詳細度をあげたのでハンバーガーメニューの影＆外枠消せた*/
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.btnx--outline-indigo {
+  color: var(--bs-indigo); background:var(--bs-white); border: 2px solid #9FA8DA; 
+}

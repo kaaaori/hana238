@@ -1,0 +1,76 @@
+注文履歴詳細
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-8">
+      <!--%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>注文ステータスで更新する場合は必要-->
+        <table class="table">
+          <tr>
+            <th>購入者</th>
+            <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+          </tr>
+          <tr>
+            <th>注文日</th>
+            <td><%= l @order.created_at %></td>
+          </tr>
+          <tr>
+            <th>配送先</th>
+            <td><%= @order.address %></td>
+            <!--<td>%= @order.postal_code% %= @order.address % %= @order.address_name %></td>でもOK-->
+          </tr>
+          <tr>
+            <th>支払い方法</th>
+            <td><%= @order.payment_method_i18n%></td>
+          </tr>
+        </table>
+      <!--% end %>-->
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-auto col-8">
+      <table class="table">
+        <thead>
+          <tr bgcolor="#e8e8e8">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+      <% @order_details.each do |order_detail| %>
+        
+        <% @total = 0 %>
+        <% @total += order_detail.item.with_tax_price %>
+        <!--%= form_with model: order_detail , url: admin_order_path(order_detail.id) , method: :patch do |f| %>注文ステータス関係-->
+        <tbody>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.item.with_tax_price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><% subtotal = (order_detail.item.with_tax_price*order_detail.amount).to_i %>
+                <%= subtotal %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="me-auto col-5">
+        <table class="table">
+          <tr>
+            <th class="col-3">商品合計</th>
+            <td class="col-2"><%= @order.order_details.sum(&:subtotal) %>円</td>
+          </tr>
+          <tr>
+            <th class="col-3">送料</th>
+            <td class="col-2">800円</td>
+          </tr>
+          <tr>
+            <th class="col-3">請求金額合計</th>
+            <th class="col-2"><%= @order.order_details.sum(&:subtotal) + 800 %>円</th>
+          </tr>
+          </table>
+      <!--% end %>-->
+    </div>
+</div>

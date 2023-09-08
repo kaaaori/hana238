@@ -1,9 +1,7 @@
-<!--エラー分日本語へ変換する&レイアウト整える-->
-<!--現状：左より＆英語-->
-<div class="errorblock">
+<div class="errorblock text-center">
   <% if @delivery_address.errors.any? %>
-    <div class="alert">
-      <h3><%= @delivery_address.errors.count %> error prohibited this obj from being saved:</h3>
+    <div class="alert text-center">
+      <h5>以下の内容を入力してください</h5>
         <ul>
           <% @delivery_address.errors.full_messages.each do |message| %>
             <li><%= message %></li>

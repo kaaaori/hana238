@@ -59,4 +59,4 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'jp_prefecture'
 gem "enum_help"
-gem 'kaminari'
+gem 'kaminari','~> 1.2.1'
