@@ -27,7 +27,7 @@ class Order < ApplicationRecord
   end
   
   def address
-    '〒' + postal_code + ' '+ prefecture_name + ' ' + address_city + ' ' + address_street + ' ' + address_building
+    '〒' + postal_code + '　'+ prefecture_name + ' ' + address_city + ' ' + address_street + ' ' + address_building
   end
   
 end

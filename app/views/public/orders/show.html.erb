@@ -6,93 +6,97 @@
   
   <h5 class="text-center my-3">注文詳細</h5>
   <div class="row d-flex justify-content-center">
-    <div class="col-md-8 col-lg-5 mx-auto">
+    <div class="col-md-8 col-lg-6 mx-auto">
+      
       <table class="table table-borderless", border="1">
         <caption align="top" class="text-dark">注文商品・支払い金額</caption>
-        <% @order_details.each do |order_detail| %>
-        <tr>
-          <!--img のサイズをいい感じにしたい/外枠消して商品毎に下線-->
-          <td align="center" valign="middle" rowspan="3">
-            <% if order_detail.item.present? %>
-            <%= image_tag order_detail.item.get_image(100,100)%>
-            <% end %>
-            </td>
-          <td colspan="2"><%= order_detail&.item&.name %></td>
-        </tr>
-        <tr>
-          <td>単価：￥<%= order_detail&.item&.with_tax_price %></td>
-        </tr>
-        <tr>
-          <td>数量：<%= order_detail.amount %></td>
-        </tr>
-        <% end %>
-        </table>
-      
-      
-      
-      <table class="table", border="1">
-        <caption align="top" class="text-dark">注文商品</caption>
-            <tr bgcolor="#e8e8e8">
-              <td>商品</td>
-              <td>単価</td>
-              <td>数量</td>
-              <td>小計</td>
-            </tr>
         <% @total = 0 %>
         <% @postage =500 %>
         <% @order_details.each do |order_detail| %>
-          <% @total += order_detail&.item&.with_tax_price.to_i*order_detail.amount %>
+        <% @total += order_detail&.item&.with_tax_price.to_i*order_detail.amount %>
+        <!--img のサイズをいい感じにしたい/外枠消して商品毎に下線を入れる/-->
+        <tbody>
+          <% if order_detail.item.blank? %>
             <tr>
-              <% if order_detail.item.blank? %>
-                <td colspan="4">この商品は削除されました。</td>
-              <% else %>
-                <td><%= image_tag order_detail.item.get_image(50,50)%> <%= order_detail.item.name %></td>
-                <td><%= order_detail.item.with_tax_price %></td>
-                <td><%= order_detail.amount %></td>
-                <td><%= order_detail.item.with_tax_price*order_detail.amount %></td>
-              <% end %>
+              <td align="center" valign="middle" rowspan="3">
+                <!--<image_tag noimd入れる-->
+              </td>
+              <td colspan="2">この商品は削除されました。</td>
+            </tr>
+          <% else %>
+            <tr>
+              <td align="center" valign="middle" rowspan="3">
+                <!--% if order_detail.item.present? %>入れた理由忘れた-->
+                  <%= image_tag order_detail.item.get_image(100,100)%>
+                <!--% end %>-->
+                </td>
+              <td colspan="2"><%= order_detail&.item&.name %></td>
+            </tr>
+            <tr>
+              <td>単価：<%= order_detail&.item&.with_tax_price %>円</td>
+            </tr>
+            <tr>
+              <td>数量：<%= order_detail.amount %></td>
             </tr>
           <% end %>
-        
+        </tbody>
+        <% end %>
+        <tfooter>
+          <!--境界線を入れたい&全体的にもう少し左に余白が欲しい-->
+          <tr>
+            <td colspan="2" align="right">商品合計：<%= @total %>円</td>
+          </tr>
+          <tr>
+            <td colspan="2" align="right">配送料：　<%= @postage %>円</td>
+          </tr>
+          <tr>
+            <td colspan="2" align="right">支払い金額：<%= @total + @postage %>円</td>
+          </tr>
+        </tfooter>
       </table>
       
-      
       <table border class="table table-borderless", border="1">
-        <caption align="top" class="text-dark">注文情報</caption>
-        
+        <caption align="top" class="text-dark">お届け先</caption>
         <tr>
-          <td bgcolor="#e8e8e8">注文日</td>
-          <td><%= @order.created_at.strftime('%Y/%m/%d (%u)') %></td>
+          <td class="col-3 col-md-2">宛名</td>
+          <td><%= @order.address_name %></td>
         <tr>
-          <td bgcolor="#e8e8e8">配送先</td>
+        <tr>
+          <td class="col-3 col-md-2">配送先</td>
           <td><%= @order.address %></td>
-          <!--<td>%= @order.postal_code% %= @order.address % %= @order.address_name %></td>でもOK-->
         </tr>
         <tr>
-          <td bgcolor="#e8e8e8">支払方法</td>
+          <td class="col-3 col-md-2">電話番号</td>
+          <td><%= @order.phone_number %></td>
+        </tr>
+      </table>
+      
+      <table border class="table table-borderless", border="1">
+        <caption align="top" class="text-dark">注文者・支払い方法</caption>
+        <tr>
+          <td class="col-3 col-md-2">注文者</td>
+          <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+        <tr>
+        <tr>
+          <td class="col-3 col-md-2" rowspan="2">住所</td>
+          <td>〒<%= @order.customer.postal_code %></td>
+        <tr>
+          <td><%= @order.customer.address %></td>
+        </tr>
+        <tr>
+          <td class="col-3 col-md-2">電話番号</td>
+          <td><%= @order.customer.phone_number %></td>
+        </tr>
+        <tr>
+          <td class="col-3 col-md-2">注文日</td>
+          <!--曜日の日本語化-->
+          <td><%= @order.created_at.strftime('%Y/%m/%d (%u)') %></td>
+        <tr>
+        <tr>
+          <td class="col-3 col-md-2">支払方法</td>
           <td><%= @order.payment_method_i18n%></td>
         </tr>
       </table>
-      <br>
-      <p>注文内容</p>
-      
-      
-      <p>請求情報</p>
-      <table border class="table">
-        <tr>
-          <td bgcolor="#e8e8e8">商品合計</td>
-          <td><%= @total %>円</td>
-        </tr>
-        <tr>
-          <td bgcolor="#e8e8e8">配送料</td>
-          <td><%= @postage %>円</td>
-        </tr>
-        <tr>
-          <td bgcolor="#e8e8e8">ご請求金額</td>
-          <td><%= @total + @postage %>円</td>
-        </tr>
-        </table>
-        
     </div>
   </div>
 </div>

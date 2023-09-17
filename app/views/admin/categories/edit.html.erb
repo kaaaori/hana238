@@ -1,24 +1,28 @@
+<div class="errorblock">
+  <% if @category.errors.any? %>
+    <div class="alert">
+      <h5>以下の内容を入力してください</h5>
+        <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+</div>
 <div class="container">
-  <h3 class="mt-5 text-center">カテゴリー</h3>
-  <h5 class="mt-5 mb-3 text-center">編集</h5>
-  <!--ラベルの箇所に勝手にCategoryと入らないようにしたい-->
+  <h3 class="mt-5 text-center">カテゴリー編集</h3>
     <%= form_with model: @category, url: admin_category_path do |f| %>
     <div class="row d-flex justify-content-center mt-5">
-      <div class="col-2">
+      <div class="col-5 col-md-3 col-lg-2">
         <%= f.text_field :name, class: 'form-control', placeholder:"カテゴリ名" %>
       </div>
-      
-      <div class="col-2">
-        <%= f.submit "変更", class: "form-control btn btn-light" %>
+      <div class="col-3 col-md-2 col-lg-1">
+        <%= f.submit "変更", class: "form-control btn btn-outline-dark" %>
+      </div>
+      <div class="col-3 col-md-2 col-lg-1">
+        <%= link_to "一覧", admin_categories_path, class: "form-control btn btn-outline-primary" %>
       </div>
     </div>
     <% end %>
-    
-    <!--一つ前に戻るボタンにしたい＋右寄せ-->
-    <div class="row text-right mt-2">
-      <%= link_to "BACK", admin_categories_path %>
-    </div>
-    
 </div>
-      
- 

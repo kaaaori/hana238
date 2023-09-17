@@ -24,6 +24,6 @@ class DeliveryAddress < ApplicationRecord
   end
   
   def address_all
-    '〒' + postal_code + ' ' + prefecture_name + ' ' + address_city + ' ' + address_street + ' ' + address_building + ' ' + address_name
+    '〒' + postal_code + ' ' + prefecture_name + ' ' + address_city + ' ' + address_street + ' ' + address_building + ' ' + address_name + ' ' + phone_number
   end
 end

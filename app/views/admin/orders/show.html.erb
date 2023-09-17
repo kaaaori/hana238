@@ -1,76 +1,95 @@
-注文履歴詳細
 <div class="container">
-  <div class="row">
-    <div class="mx-auto col-8">
+  <h3 class="my-5 text-center"><%= @order.customer.last_name %> <%= @order.customer.first_name %> さんの注文履歴</h3>
+  
+  <h5 class="text-center my-3">注文詳細</h5>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6 mx-auto">
       <!--%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>注文ステータスで更新する場合は必要-->
-        <table class="table">
+      <table class="table", border="1">
+        <caption align="top" class="text-dark">注文商品・支払い金額</caption>
+        <% @total = 0 %>
+        <% @postage =500 %>
+        <% @order_details.each do |order_detail| %>
+          <% if order_detail.item.blank? %>
+            <tr>
+              <td align="center" valign="middle" rowspan="3">
+                <!--<image_tag noimd入れる-->
+              </td>
+              <td colspan="2">この商品は削除されました。</td>
+            </tr>
+          <% else %>
+          <% @total += order_detail.item.with_tax_price %>
+          <!--%= form_with model: order_detail , url: admin_order_path(order_detail.id) , method: :patch do |f| %>注文ステータス関係-->
+            <tr>
+              <td align="center" valign="middle" rowspan="4">
+                <%= image_tag order_detail.item.get_image(100,100)%>
+              </td>
+              <td><%= order_detail&.item&.name %></td>
+            </tr>
+            <tr>
+              <td>単価：<%= order_detail&.item&.with_tax_price %>円(税込)</td>
+            </tr>
+            <tr>
+              <td>数量：<%= order_detail.amount %></td>
+            </tr>
+            <tr>
+              <td>小計：<% subtotal = (order_detail.item.with_tax_price*order_detail.amount).to_i %>
+                  <%= subtotal %>円
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+        <tr>
+          <td align="center" valign="middle" rowspan="3">
+          <td>商品合計：<%= @total %>円</td>
+        </tr>
+        <tr>
+          <td>配送料：<%= @postage %>円</td>
+        </tr>
+        <tr>
+          <td>請求合計金額：<%= @total + @postage %>円</td>
+        </tr>
+      </table>
+      
+      <table border class="table table-borderless", border="1">
+        <caption align="top" class="text-dark">お届け先</caption>
+        <tr>
+          <td class="col-3 col-md-2">宛名</td>
+          <td><%= @order.address_name %></td>
+        <tr>
+        <tr>
+          <td class="col-3 col-md-2">配送先</td>
+          <td><%= @order.address %></td>
+        </tr>
+        <tr>
+          <td class="col-3 col-md-2">電話番号</td>
+          <td><%= @order.phone_number %></td>
+        </tr>
+      </table>
+      
+      <table border class="table table-borderless", border="1">
+        <caption align="top" class="text-dark">購入者情報</caption>
           <tr>
-            <th>購入者</th>
+            <td class="col-3 col-md-2">購入者</td>
             <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
-          </tr>
           <tr>
-            <th>注文日</th>
+          <tr>
+            <td class="col-3 col-md-2">住所</td>
+            <td><%= @order.customer.address %></td>
+          <tr>
+          <tr>
+            <td class="col-3 col-md-2">電話番号</td>
+            <td><%= @order.customer.phone_number %></td>
+          <tr>
+          <tr>
+            <td>注文日</td>
             <td><%= l @order.created_at %></td>
           </tr>
           <tr>
-            <th>配送先</th>
-            <td><%= @order.address %></td>
-            <!--<td>%= @order.postal_code% %= @order.address % %= @order.address_name %></td>でもOK-->
-          </tr>
-          <tr>
-            <th>支払い方法</th>
+            <td>支払い方法</td>
             <td><%= @order.payment_method_i18n%></td>
           </tr>
         </table>
-      <!--% end %>-->
     </div>
   </div>
-  <div class="row">
-    <div class="mx-auto col-8">
-      <table class="table">
-        <thead>
-          <tr bgcolor="#e8e8e8">
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
-          </tr>
-        </thead>
-      <% @order_details.each do |order_detail| %>
-        
-        <% @total = 0 %>
-        <% @total += order_detail.item.with_tax_price %>
-        <!--%= form_with model: order_detail , url: admin_order_path(order_detail.id) , method: :patch do |f| %>注文ステータス関係-->
-        <tbody>
-          <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.item.with_tax_price %></td>
-            <td><%= order_detail.amount %></td>
-            <td><% subtotal = (order_detail.item.with_tax_price*order_detail.amount).to_i %>
-                <%= subtotal %>
-            </td>
-          </tr>
-        </tbody>
-      <% end %>
-      </table>
-    </div>
-  </div>
-  <div class="row">
-    <div class="me-auto col-5">
-        <table class="table">
-          <tr>
-            <th class="col-3">商品合計</th>
-            <td class="col-2"><%= @order.order_details.sum(&:subtotal) %>円</td>
-          </tr>
-          <tr>
-            <th class="col-3">送料</th>
-            <td class="col-2">800円</td>
-          </tr>
-          <tr>
-            <th class="col-3">請求金額合計</th>
-            <th class="col-2"><%= @order.order_details.sum(&:subtotal) + 800 %>円</th>
-          </tr>
-          </table>
-      <!--% end %>-->
-    </div>
 </div>

@@ -1,27 +1,25 @@
 <div class="container">
   <h3 class="mt-5 text-center">カテゴリー</h3>
- 
     <%= form_with model: @categories, url: admin_categories_path do |f| %>
-      <div class="row d-flex justify-content-center mt-5">
-        <div class="col-2">
-          <%= f.text_field :name, class: 'form-control', placeholder:"カテゴリ名" %>
+      <div class="row d-flex justify-content-center my-5">
+        <div class="col-5 col-md-3 col-lg-2">
+          <%= f.text_field :name, autofocus: true, class: 'form-control' %>
         </div>
-        
-        <div class="col-2">
+        <div class="col-5 col-md-3 col-lg-2">
           <%= f.submit "新規登録", class: "form-control btn btn-light" %>
         </div>
       </div>
     <% end %>
     
-    <div class="row d-flex justify-content-center mt-5">
-      <h5 class="mt-3 mb-3 text-center">一覧</h5>
-      <div class="col-6 mx-auto">
+    <div class="row d-flex justify-content-center">
+      <h5 class="my-3 text-center">一覧</h5>
+      <div class="col-10 col-md-5 mx-auto">
       <table class="table table-borderless">
       <% @categories.each do |category| %>
         <tr>
-          <td class="col-2" align="center"><%= category.name %></td>
-          <td class="col-1" align="center"><%= link_to "　編集　", edit_admin_category_path(category.id), class: "btn btn-sm btn-success" %></td>
-          <td class="col-1" align="center"><%= link_to "　削除　", admin_category_path(category.id), class: "btn btn-sm btn-danger", method: :delete %></td>
+          <td class="col-md-2" align="center"><%= category.name %></td>
+          <td class="col-md-2" align="center"><%= link_to "　編集　", edit_admin_category_path(category.id), class: "btn btn-sm btn-outline-dark" %></td>
+          <td class="col-md-2" align="center"><%= link_to "　削除　", admin_category_path(category.id), class: "btn btn-sm btn-outline-danger", method: :delete %></td>
         </tr>
       <% end %>
       </table>

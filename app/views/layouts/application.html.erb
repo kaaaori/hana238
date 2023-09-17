@@ -47,12 +47,12 @@
                   <% end %>
                   <p class='nav-link text-dark'>cart</p>
                 </li>
-                <li class="list-inline-item ms-2 d-none d-md-inline-block">
-                  <%= link_to root_path, method: :delete, class: 'nav-link text-center' do %>
-                  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>
-                  <% end %>
-                  <p class='nav-link text-dark'>contact</p>
-                </li>
+                <!--<li class="list-inline-item ms-2 d-none d-md-inline-block">-->
+                <!--  %= link_to root_path, method: :delete, class: 'nav-link text-center' do %>-->
+                <!--  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>-->
+                <!--  % end %>-->
+                <!--  <p class='nav-link text-dark'>contact</p>-->
+                <!--</li>-->
                 <li class="list-inline-item ms-2 d-none d-md-inline-block">
                   <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-center' do %>
                   <i class="fas fa-sign-out-alt fa-lg" style="color: #000000;"></i>
@@ -100,12 +100,12 @@
                   <% end %>
                   <p class='nav-link text-dark'>item</p>
                 </li>
-                <li class="list-inline-item ms-2 d-none d-md-inline-block">
-                  <%= link_to root_path, method: :delete, class: 'nav-link text-center' do %>
-                  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>
-                  <% end %>
-                  <p class='nav-link text-dark'>contact</p>
-                </li>
+                <!--<li class="list-inline-item ms-2 d-none d-md-inline-block">-->
+                <!--  %= link_to root_path, method: :delete, class: 'nav-link text-center' do %>-->
+                <!--  <i class="fas fa-info-circle fa-lg" style="color: #000000;"></i>-->
+                <!--  % end %>-->
+                <!--  <p class='nav-link text-dark'>contact</p>-->
+                <!--</li>-->
       				<% end %>
       				<li class="list-inline-item d-md-none">
       				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -188,18 +188,18 @@
                   </ul>
                 </li>
                 <!--<li class="nav-item col-auto">-->
-                <!--  <%= link_to "photogallery", root_path, class: 'nav-link' %>-->
+                <!--  %= link_to "photogallery", root_path, class: 'nav-link' %>-->
                 <!--</li>-->
-                <li class="nav-item col-auto">
-                  <%= link_to "contact", root_path, class: 'nav-link' %>
-                </li>
+                <!--<li class="nav-item col-auto">-->
+                <!--  %= link_to "contact", root_path, class: 'nav-link' %>-->
+                <!--</li>-->
               <% end %>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <!--flashのレイアウトはあとで-->
+    <!--flashのレイアウト-->
     <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
   </body>

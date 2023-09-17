@@ -5,6 +5,7 @@ class Public::OrdersController < ApplicationController
     if current_customer.cart_items.empty?
       redirect_to cart_items_path
     end
+    @customer = current_customer
   end
   
   def confirm
@@ -17,6 +18,7 @@ class Public::OrdersController < ApplicationController
       @order.address_street = current_customer.address_street
       @order.address_building = current_customer.address_building
       @order.address_name = current_customer.last_name + current_customer.first_name
+      @order.phone_number = current_customer.phone_number
     elsif params[:order][:select_address] == "1"
       @address = DeliveryAddress.find(params[:order][:delivery_address_id])
       @order.postal_code = @address.postal_code
@@ -25,6 +27,7 @@ class Public::OrdersController < ApplicationController
       @order.address_street = @address.address_street
       @order.address_building = @address.address_building
       @order.address_name = @address.address_name
+      @order.phone_number = @address.phone_number
     elsif params[:order][:select_address] == "2"
     end
     
@@ -43,6 +46,7 @@ class Public::OrdersController < ApplicationController
       end
     end
     @order = Order.new(order_params)
+    
     if @order.save
       @cart_items.each do |cart_item|
         @order_details = OrderDetail.new
@@ -79,6 +83,6 @@ class Public::OrdersController < ApplicationController
   private
     def order_params
       params.require(:order).permit(:payment_method, :postal_code, :prefecture_code, :address_city, 
-      :address_street, :address_building, :address_name, :postage, :total, :customer_id, :delivery_day, :delivery_time)
+      :address_street, :address_building, :address_name, :postage, :total, :customer_id, :delivery_day, :delivery_time, :phone_number)
     end
 end
