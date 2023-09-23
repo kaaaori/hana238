@@ -14,23 +14,8 @@ ActiveStorage.start()
 
 import "bootstrap";
 import "../stylesheets/application.scss";
-
-//= require rails-ujs
-//= require activestorage
-//= require turbolinks 
-//= require jquery
-//= require_tree .
-
-$(function() {
-  return $('#customer_postcode').jpostal({
-    postcode: ['#customer_postcode'],
-    address: {
-      '#customer_prefecture_code': '%3',
-      '#customer_address_city': '%4',
-      '#customer_address_street': '%5%6%7'
-    },
-  });
-});
-
-// https://zenn.dev/necocoa/articles/rails-stimulus-tr-link参照
 import "controllers"
+
+import Swiper from 'swiper/swiper-bundle.js';
+import 'swiper/swiper-bundle.css';
+window.Swiper = Swiper

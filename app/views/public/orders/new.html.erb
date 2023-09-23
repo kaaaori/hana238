@@ -11,7 +11,7 @@
     <div class="row d-flex justify-content-center mb-2">
       <div class="col-md-10 col-lg-6 mx-auto">
         <%= f.radio_button :select_address, 0 %>
-        <%= f.label :ご自身の住所 %><br />
+        <%= f.label :select_address_0, "ご自身の住所" %><br />
         <table class="table table-borderless", border="1">
           <tr>
             <td class="col-3">宛名</td>
@@ -22,53 +22,52 @@
             <td>〒<%= @customer.postal_code %><%= @customer.address %></td>
           </tr>
           <tr>
-            <td class="col-3">電話番号</td>
+            <td class="col-4">電話番号</td>
             <td><%= @customer.phone_number %></td>
           </tr>
         </table>
       </div>
     </div>
     <div class="row d-flex justify-content-center mb-4">
-      <div class="col-md-10 col-lg-6 mx-auto">
-        <!--レスポンシブできていない-->
+      <div class="col-sm-10 col-lg-6 mx-auto">
         <%= f.radio_button :select_address, 1 %>
-        <%= f.label :登録住所から選択 %>
-        <%= f.select :delivery_address_id, options_from_collection_for_select(DeliveryAddress.all, :id, :address_all, :phone_number), { prompt: '選択してください' } %>
+        <%= f.label :select_address_1, "登録住所から選択" %>
+        <%= f.select :delivery_address_id, options_from_collection_for_select(DeliveryAddress.all, :id, :address_all, :phone_number), { prompt: '選択してください' }, class: 'form-control'%>
       </div>
     </div>
     <div class="row d-flex justify-content-center mb-3">
       <div class="col-md-10 col-lg-6 mx-auto">
         <%= f.radio_button :select_address, 2 %>
-        <%= f.label :新しいお届け先 %>
+        <%= f.label :select_address_2, "新しいお届け先" %>
         <table class="table table-borderless", border="1">
           <tr>
             <td class="col-3">宛名</td>
-            <td><%= f.text_field :address_name, size: 30 %></td>
+            <td><%= f.text_field :address_name, class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">郵便番号</td>
-            <td><%= f.text_field :postal_code, size: 30 %></td>
+            <td><%= f.text_field :postal_code, autocomplete: 'postal_code', id: "postal_code", class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">都道府県</td>
             <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
-            id: 'customer_prefecture_code' %></td>
+                    id: 'prefecture_code', class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">市区町村</td>
-            <td><%= f.text_field :address_city, size: 30 %></td>
+            <td><%= f.text_field :address_city, autocomplete: 'address_city', id: "address_city", class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">番地</td>
-            <td><%= f.text_field :address_street, size: 30 %></td>
+            <td><%= f.text_field :address_street, autocomplete: 'address_street', id: "address_street", class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">建物</td>
-            <td><%= f.text_field :address_building, size: 30 %></td>
+            <td><%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="col-3">電話番号</td>
-            <td><%= f.text_field :phone_number, size: 30 %></td>
+            <td><%= f.text_field :phone_number, class: 'form-control' %></td>
           </tr> 
         </table>
       </div>
@@ -114,3 +113,4 @@
     </div>
 </div>
 <% end %>
+<%= render 'layouts/jpostal' %>

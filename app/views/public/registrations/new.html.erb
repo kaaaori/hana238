@@ -14,33 +14,30 @@
       </div>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-      <%= f.label :メールアドレス %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
+      <%= f.label :email, "メールアドレス" %><br />
+      <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-      <%= f.label :電話番号 %><br />
-      <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder:"ハイフン不要" %>
-    </div>
-  　<head>
-      <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
-    </head>
-    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-      <%= f.label :郵便番号 %><br />
-      <%= f.text_field :postal_code , id: "customer_postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
+      <%= f.label :phone_number, "電話番号" %><br />
+      <%= f.text_field :phone_number, class: 'form-control', placeholder:"ハイフン不要" %>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-      <%= f.label :prefecture_code, '都道府県' %><br />
+      <%= f.label :postal_code, "郵便番号" %><br />
+      <%= f.text_field :postal_code, autocomplete: 'postal_code', id: "postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
+    </div>
+    <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
+      <%= f.label :prefecture_code, "都道府県" %><br />
       <!--47都道府県をプルダウンメニューで表示-->
       <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
-          id: 'customer_prefecture_code', class: 'form-control' %>
+          id: 'prefecture_code', class: 'form-control' %>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :address_city, '市区町村' %><br />
-      <%= f.text_field :address_city, autocomplete: 'address_city', id: "customer_address_city", class: 'form-control'%>
+      <%= f.text_field :address_city, autocomplete: 'address_city', id: "address_city", class: 'form-control' %>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-      <%= f.label :address_street, '番地' %><br />
-      <%= f.text_field :address_street, autocomplete: 'address_street', id: "user_address_street", class: 'form-control'%>
+      <%= f.label :address_street, "番地" %><br />
+      <%= f.text_field :address_street, autocomplete: 'address_street', id: "address_street", class: 'form-control'%>
     </div>
     <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
       <%= f.label :address_building, '建物' %><br/>
@@ -62,3 +59,4 @@
     </div>
   </div>
 <% end %>
+<%= render 'layouts/jpostal' %>

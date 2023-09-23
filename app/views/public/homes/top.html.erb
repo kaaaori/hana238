@@ -1,1 +1,52 @@
-<h1 class="text-center">top</h1>
+<div class="container">
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" id="top-slide">
+        <%= image_tag "top1.jpg", class: "topimg img-fluid" %>
+      </div>
+      <div class="swiper-slide" id="top-slide">
+         <%= image_tag "top2.jpg", class: "topimg img-fluid" %>
+      </div>
+      <div class="swiper-slide" id="top-slide">
+         <%= image_tag "top3.jpg", class: "topimg img-fluid" %>
+      </div>
+      <div class="swiper-slide" id="top-slide">
+         <%= image_tag "top4.jpg", class: "topimg img-fluid" %>
+      </div>
+    </div>
+    <!-- ページネーションの要素 -->
+    <div class="swiper-pagination"></div>
+    <!-- ナビゲーションボタン （前、次） -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<script>
+  const opt = {
+    loop: true, 
+    pagination: { 
+      el: '.swiper-pagination', 
+    },
+    navigation: { 
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  }
+  
+  // Swiperを実行(初期化)
+  $(document).on('turbolinks:load', function() {
+      let swiper = new Swiper('.swiper',opt);
+  });
+</script>
+
+<div class="container">
+  <div class="row  my-5">
+    <div class="text-center"> 
+      <p>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+      <p>テキストテキストテキストテキストテキストテキストテキストテキスト</p>
+      <i class="fab fa-instagram fa-lg" style="color: #8e8f90;"></i>
+    </div>
+  </div>
+  
+</div>

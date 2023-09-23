@@ -8,41 +8,40 @@
   </div>
   <h5 class="text-center my-3">お届け先の編集</h5>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-    <%= f.label :氏名 %><br />
+    <%= f.label :address_name, "氏名" %><br />
     <%= f.text_field :address_name, autofocus: true, class: 'form-control' %>
   </div>
-  <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
-    
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-    <%= f.label :郵便番号 %><br />
-    <%= f.text_field :postal_code , id: "customer_postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
+    <%= f.label :postal_code, "郵便番号" %><br />
+    <%= f.text_field :postal_code, autocomplete: 'postal_code', id: "postal_code", class: 'form-control', placeholder:"ハイフン不要" %>
   </div>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
     <%= f.label :prefecture_code, '都道府県' %><br />
     <!--47都道府県をプルダウンメニューで表示-->
     <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' },
-        id: 'customer_prefecture_code', class: 'form-control' %>
+        id: 'prefecture_code', class: 'form-control' %>
   </div>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
     <%= f.label :address_city, '市区町村' %><br />
-    <%= f.text_field :address_city, autocomplete: 'address_city', id: "customer_address_city", class: 'form-control'%>
+    <%= f.text_field :address_city, autocomplete: 'address_city', id: "address_city", class: 'form-control'%>
   </div>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
     <%= f.label :address_street, '番地' %><br />
-    <%= f.text_field :address_street, autocomplete: 'address_street', id: "user_address_street", class: 'form-control'%>
+    <%= f.text_field :address_street, autocomplete: 'address_street', id: "address_street", class: 'form-control'%>
   </div>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
     <%= f.label :address_building, '建物' %><br/>
     <%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control'%>
   </div>
   <div class="mb-3 col-10 col-md-8 col-lg-6 mx-auto">
-    <%= f.label :電話番号 %><br />
+    <%= f.label :phone_number, "電話番号" %><br />
     <%= f.text_field :phone_number, class: 'form-control', placeholder:"ハイフン不要"%>
   </div>
-  <!--customer.id 送らないとエラーが出る-->
+  <!--customer.id 送らないとエラーが出るので注意-->
   <%= f.hidden_field :customer_id, value: current_customer.id%>
   <div class="my-3 text-center">
     <%= f.submit "登録する", class: "btn btn-sm btn-dark col-4 col-lg-2" %>
   </div>
 </div>
 <% end %>
+<%= render 'layouts/jpostal' %>

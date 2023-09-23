@@ -11,7 +11,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application' %>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
   </head>
 
   <body class="d-flex flex-column vh-100">
@@ -19,7 +20,7 @@
       <nav class="navbar navbar-light">
   	    <div class="container">
   	      <!--bootstrapのnavを活かしきれていない-->
-  	      <%= link_to image_tag('logo.png', width: 255, height: 65), root_path, class: 'sized navbar-brand' %>
+  	      <%= link_to image_tag('logo.png', width: 255, height: 65), root_path, class: "img-fluid" %>
   		    <div class="float-end">
       			<ul class="list-inline mt-5">
               <% if customer_signed_in? %>
@@ -203,4 +204,19 @@
     <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
   </body>
+  
+  <footer class="footer">
+  <div class="md-flex md-justify-between">
+    <%= link_to image_tag('logo.png', width: 255, height: 65), root_path, class: "img-fluid" %>
+    <ul class="footer__navi flex">
+      <li><a href="#">About</a></li>
+      <li><a href="#">サイトマップ</a></li>
+      <li><a href="#">プライバシーポリシー</a></li>
+    </ul>
+  </div>
+  <hr />
+  <p class="copyright">
+    © 2023 <a href="#">HANA238 Inc.</a> All Rights Reserved.
+  </p>
+</footer>
 </html>
